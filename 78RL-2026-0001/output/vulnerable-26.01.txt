@@ -1,0 +1,72 @@
+=================================================================
+==332397==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x519000000e80 at pc 0x5efb41152747 bp 0x7fff4ea07e10 sp 0x7fff4ea07e08
+READ of size 1 at 0x519000000e80 thread T0
+    #0 0x5efb41152746 in NArchive::NExt::CHandler::Open2(IInStream*) <build>/pre/CPP/7zip/Bundles/Alone2/../../Archive/ExtHandler.cpp:1267:16
+    #1 0x5efb41153058 in NArchive::NExt::CHandler::Open(IInStream*, unsigned long const*, IArchiveOpenCallback*) <build>/pre/CPP/7zip/Bundles/Alone2/../../Archive/ExtHandler.cpp:1571:13
+    #2 0x5efb415dde39 in CArc::OpenStream2(COpenOptions const&) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:1975:27
+    #3 0x5efb415e6c90 in CArc::OpenStream(COpenOptions const&) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3024:3
+    #4 0x5efb415e7d45 in CArc::OpenStreamOrFile(COpenOptions&) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3119:17
+    #5 0x5efb415e917d in CArchiveLink::Open(COpenOptions&) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3295:28
+    #6 0x5efb415ea4b9 in CArchiveLink::Open2(COpenOptions&, IOpenCallbackUI*) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3419:17
+    #7 0x5efb415eb5ae in CArchiveLink::Open3(COpenOptions&, IOpenCallbackUI*) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3487:17
+    #8 0x5efb41621b6c in CArchiveLink::Open_Strict(COpenOptions&, IOpenCallbackUI*) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Console/../Common/OpenArchive.h:437:22
+    #9 0x5efb41621b6c in ListArchives(CListOptions const&, CCodecs*, CObjectVector<COpenType> const&, CRecordVector<int> const&, bool, CObjectVector<UString>&, CObjectVector<UString>&, bool, bool, NWildcard::CCensorNode const&, bool, bool, bool&, UString&, CObjectVector<CProperty> const*, unsigned long&, unsigned long&) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Console/List.cpp:1191:30
+    #10 0x5efb41628ea3 in Main2(int, char**) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Console/Main.cpp:1526:21
+    #11 0x5efb4162ffef in main <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Console/MainAr.cpp:132:11
+    #12 0x7de88342a1c9 in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #13 0x7de88342a28a in __libc_start_main csu/../csu/libc-start.c:360:3
+    #14 0x5efb40ec7934 in _start (<build>/pre/CPP/7zip/Bundles/Alone2/_o/7zz+0xb1934) (BuildId: 55a9b9abbb7c063b4241169326f9b4cb905943fe)
+
+0x519000000e80 is located 0 bytes after 1024-byte region [0x519000000a80,0x519000000e80)
+allocated by thread T0 here:
+    #0 0x5efb40fa0ec1 in operator new[](unsigned long) (<build>/pre/CPP/7zip/Bundles/Alone2/_o/7zz+0x18aec1) (BuildId: 55a9b9abbb7c063b4241169326f9b4cb905943fe)
+    #1 0x5efb410ef2b0 in CBuffer<unsigned char>::Alloc(unsigned long) <build>/pre/CPP/7zip/Bundles/Alone2/../../Archive/../../Common/MyBuffer.h:69:18
+    #2 0x5efb4114e527 in NArchive::NExt::CHandler::Open2(IInStream*) <build>/pre/CPP/7zip/Bundles/Alone2/../../Archive/ExtHandler.cpp:1245:16
+    #3 0x5efb41153058 in NArchive::NExt::CHandler::Open(IInStream*, unsigned long const*, IArchiveOpenCallback*) <build>/pre/CPP/7zip/Bundles/Alone2/../../Archive/ExtHandler.cpp:1571:13
+    #4 0x5efb415dde39 in CArc::OpenStream2(COpenOptions const&) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:1975:27
+    #5 0x5efb415e6c90 in CArc::OpenStream(COpenOptions const&) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3024:3
+    #6 0x5efb415e7d45 in CArc::OpenStreamOrFile(COpenOptions&) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3119:17
+    #7 0x5efb415e917d in CArchiveLink::Open(COpenOptions&) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3295:28
+    #8 0x5efb415ea4b9 in CArchiveLink::Open2(COpenOptions&, IOpenCallbackUI*) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3419:17
+    #9 0x5efb415eb5ae in CArchiveLink::Open3(COpenOptions&, IOpenCallbackUI*) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3487:17
+    #10 0x5efb41621b6c in CArchiveLink::Open_Strict(COpenOptions&, IOpenCallbackUI*) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Console/../Common/OpenArchive.h:437:22
+    #11 0x5efb41621b6c in ListArchives(CListOptions const&, CCodecs*, CObjectVector<COpenType> const&, CRecordVector<int> const&, bool, CObjectVector<UString>&, CObjectVector<UString>&, bool, bool, NWildcard::CCensorNode const&, bool, bool, bool&, UString&, CObjectVector<CProperty> const*, unsigned long&, unsigned long&) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Console/List.cpp:1191:30
+    #12 0x5efb41628ea3 in Main2(int, char**) <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Console/Main.cpp:1526:21
+    #13 0x5efb4162ffef in main <build>/pre/CPP/7zip/Bundles/Alone2/../../UI/Console/MainAr.cpp:132:11
+    #14 0x7de88342a1c9 in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #15 0x7de88342a28a in __libc_start_main csu/../csu/libc-start.c:360:3
+    #16 0x5efb40ec7934 in _start (<build>/pre/CPP/7zip/Bundles/Alone2/_o/7zz+0xb1934) (BuildId: 55a9b9abbb7c063b4241169326f9b4cb905943fe)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow <build>/pre/CPP/7zip/Bundles/Alone2/../../Archive/ExtHandler.cpp:1267:16 in NArchive::NExt::CHandler::Open2(IInStream*)
+Shadow bytes around the buggy address:
+  0x519000000c00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x519000000c80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x519000000d00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x519000000d80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x519000000e00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x519000000e80:[fa]fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x519000000f00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x519000000f80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x519000001000: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x519000001080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x519000001100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==332397==ABORTING

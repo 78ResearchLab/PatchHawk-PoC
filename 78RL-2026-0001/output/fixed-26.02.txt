@@ -1,0 +1,19 @@
+
+7-Zip (z) 26.02 (x64) : Copyright (c) 1999-2026 Igor Pavlov : 2026-06-25
+ 64-bit locale=en_US.UTF-8 Threads:32 OPEN_MAX:1048576
+
+Scanning the drive for archives:
+1 file, 8388608 bytes (8192 KiB)
+
+Listing archive: <build>/poc/poc.ext
+
+
+ERROR: <build>/poc/poc.ext : <build>/poc/poc.ext
+Open ERROR: Cannot open the file as [Ext] archive
+
+
+ERRORS:
+Headers Error
+
+
+Errors: 1
