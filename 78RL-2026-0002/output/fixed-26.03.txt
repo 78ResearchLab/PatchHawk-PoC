@@ -1,0 +1,37 @@
+
+7-Zip (z) 26.03 (x64) : Copyright (c) 1999-2026 Igor Pavlov : 2026-09-03
+ 64-bit locale=C.UTF-8 Threads:32 OPEN_MAX:4096
+
+Scanning the drive for archives:
+1 file, 284 bytes (1 KiB)
+
+Extracting archive: poc.swm
+
+ERRORS:
+Headers Error
+
+--
+Path = poc.swm
+Type = wim
+ERRORS:
+Headers Error
+Physical Size = 284
+Size = 16
+Packed Size = 16
+Method = Copy:15
+Cluster Size = 32768
+Version = 1.13
+Multivolume = +
+Volume = 1
+Volumes = 1
+Images = 0
+
+ERROR: Unavailable data : [DELETED]/0
+
+Sub items Errors: 1
+
+Archives with Errors: 1
+
+Open Errors: 1
+
+Sub items Errors: 1
