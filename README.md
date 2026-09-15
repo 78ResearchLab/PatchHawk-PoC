@@ -11,4 +11,6 @@ Follow [PatchHawk on X](https://x.com/patchhawk_) for updates.
 | Software | Version | Link | Description |
 |---|---|---|---|
 | 7-Zip | 26.01 | [78RL-2026-0001](78RL-2026-0001/README.md) | ext filesystem bitmap out-of-bounds read |
+| 7-Zip | 26.02 | [78RL-2026-0002](78RL-2026-0002/README.md) | Split WIM volume index out-of-bounds read reached while extracting |
+| 7-Zip | 26.02 | [78RL-2026-0003](78RL-2026-0003/README.md) | Split cabinet folder index null dereference in the decompression loop |
 | Redis | 8.10.0 | [CVE-2026-62356](CVE-2026-62356/README.md) | Count-Min Sketch integer overflow leading to an out-of-bounds write |
