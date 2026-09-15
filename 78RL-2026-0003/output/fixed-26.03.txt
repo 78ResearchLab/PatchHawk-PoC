@@ -1,0 +1,26 @@
+
+7-Zip (z) 26.03 (x64) : Copyright (c) 1999-2026 Igor Pavlov : 2026-09-03
+ 64-bit locale=C.UTF-8 Threads:32 OPEN_MAX:4096
+
+Scanning the drive for archives:
+1 file, 116 bytes (1 KiB)
+
+Extracting archive: poc.cab
+--
+Path = poc.cab
+Type = Cab
+Physical Size = 116
+Total Physical Size = 161
+Method = None
+Blocks = 1
+Volumes = 2
+Volume Index = 0
+ID = 4369
+
+ERROR: Data Error : x.bin
+
+Sub items Errors: 1
+
+Archives with Errors: 1
+
+Sub items Errors: 1

@@ -1,0 +1,25 @@
+
+7-Zip (z) 26.02 (x64) : Copyright (c) 1999-2026 Igor Pavlov : 2026-06-25
+ 64-bit locale=C.UTF-8 Threads:32 OPEN_MAX:4096
+
+Scanning the drive for archives:
+1 file, 116 bytes (1 KiB)
+
+Extracting archive: poc.cab
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==11==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x56dcd5c3a943 bp 0x7ffc995a2630 sp 0x7ffc995a2360 T0)
+==11==The signal is caused by a READ memory access.
+==11==Hint: address points to the zero page.
+    #0 0x56dcd5c3a943 in NArchive::NCab::CHandler::Extract(unsigned int const*, unsigned int, int, IArchiveExtractCallback*) <build>/CPP/7zip/Bundles/Alone2/../../Archive/Cab/CabHandler.cpp:1092:11
+    #1 0x56dcd5eddd30 in DecompressArchive(CCodecs*, CArchiveLink const&, unsigned long, NWildcard::CCensorNode const&, CExtractOptions const&, bool, IExtractCallbackUI*, IFolderArchiveExtractCallback*, CArchiveExtractCallback*, UString&, unsigned long&) <build>/CPP/7zip/Bundles/Alone2/../../UI/Common/Extract.cpp:243:23
+    #2 0x56dcd5eddd30 in Extract(CCodecs*, CObjectVector<COpenType> const&, CRecordVector<int> const&, CObjectVector<UString>&, CObjectVector<UString>&, NWildcard::CCensorNode const&, CExtractOptions const&, IOpenCallbackUI*, IExtractCallbackUI*, IFolderArchiveExtractCallback*, IHashCalc*, UString&, CDecompressStat&) <build>/CPP/7zip/Bundles/Alone2/../../UI/Common/Extract.cpp:550:5
+    #3 0x56dcd5f4e2ca in Main2(int, char**) <build>/CPP/7zip/Bundles/Alone2/../../UI/Console/Main.cpp:1403:21
+    #4 0x56dcd5f55c9f in main <build>/CPP/7zip/Bundles/Alone2/../../UI/Console/MainAr.cpp:132:11
+    #5 0x7664b6dcf1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #6 0x7664b6dcf28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #7 0x56dcd57ee934 in _start (<build>/7zz+0xb1934) (BuildId: f9c8f2348ccb0d12c7a21de66f19ebb5d2ac2c1e)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV <build>/CPP/7zip/Bundles/Alone2/../../Archive/Cab/CabHandler.cpp:1092:11 in NArchive::NCab::CHandler::Extract(unsigned int const*, unsigned int, int, IArchiveExtractCallback*)
+==11==ABORTING
