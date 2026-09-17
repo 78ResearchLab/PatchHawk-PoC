@@ -1,0 +1,10 @@
+OpenCV 4.13.0
+double free or corruption (!prev)
+exit status: 134
+bash: line 9:    13 Aborted                 (core dumped) PYTHONPATH=$D LD_LIBRARY_PATH=/opt/ocv-4.13.0/lib python3 -u -c '
+import cv2, sys
+print("OpenCV", cv2.__version__)
+m = cv2.imread("/poc/poc.pam", cv2.IMREAD_GRAYSCALE)
+print("imread returned:", None if m is None else m.shape)
+print("returned normally")
+'

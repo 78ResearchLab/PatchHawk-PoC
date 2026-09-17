@@ -1,0 +1,67 @@
+OpenCV 4.13.0
+=================================================================
+==1==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x503000068e80 at pc 0x7dd5f38f042e bp 0x7ffd50d03b30 sp 0x7ffd50d032d8
+READ of size 4000000 at 0x503000068e80 thread T0
+    #0 0x7dd5f38f042d in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:115
+    #1 0x7dd5d257efa4 in memcpy /usr/include/x86_64-linux-gnu/bits/string_fortified.h:29
+    #2 0x7dd5d257efa4 in cv::Mat::copyTo(cv::_OutputArray const&) const /src/opencv-4.13.0/modules/core/src/copy.cpp:491
+    #3 0x7dd5e8aee5f2 in cv::dnn::dnn4_v20251223::getMatFromTensor(opencv_onnx::TensorProto const&) /src/opencv-4.13.0/modules/dnn/src/onnx/onnx_graph_simplifier.cpp:1727
+    #4 0x7dd5e8b7aab3 in cv::dnn::dnn4_v20251223::ONNXImporter::getGraphTensors[abi:cxx11](opencv_onnx::GraphProto const&) /src/opencv-4.13.0/modules/dnn/src/onnx/onnx_importer.cpp:422
+    #5 0x7dd5e8c24260 in cv::dnn::dnn4_v20251223::ONNXImporter::populateNet() /src/opencv-4.13.0/modules/dnn/src/onnx/onnx_importer.cpp:820
+    #6 0x7dd5e8c344d8 in cv::dnn::dnn4_v20251223::ONNXImporter::ONNXImporter(cv::dnn::dnn4_v20251223::Net&, char const*) /src/opencv-4.13.0/modules/dnn/src/onnx/onnx_importer.cpp:287
+    #7 0x7dd5e8c36067 in cv::dnn::dnn4_v20251223::Net cv::dnn::dnn4_v20251223::detail::readNet<cv::dnn::dnn4_v20251223::ONNXImporter, char const*>(char const*&&) /src/opencv-4.13.0/modules/dnn/src/onnx/../dnn_common.hpp:77
+    #8 0x7dd5e8c36887 in cv::dnn::dnn4_v20251223::Net cv::dnn::dnn4_v20251223::detail::readNetDiagnostic<cv::dnn::dnn4_v20251223::ONNXImporter, char const*>(char const*&&) /src/opencv-4.13.0/modules/dnn/src/onnx/../dnn_common.hpp:84
+    #9 0x7dd5e8c3756c in cv::dnn::dnn4_v20251223::readNetFromONNX(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /src/opencv-4.13.0/modules/dnn/src/onnx/onnx_importer.cpp:4051
+    #10 0x7dd5f040b116 in pyopencv_cv_dnn_readNetFromONNX /bsan/4.13.0/modules/python_bindings_generator/pyopencv_generated_funcs.h:17389
+    #11 0x58216e  (/usr/bin/python3.12+0x58216e) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+    #12 0x548fb4 in _PyObject_MakeTpCall (/usr/bin/python3.12+0x548fb4) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+    #13 0x5d710e in _PyEval_EvalFrameDefault (/usr/bin/python3.12+0x5d710e) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+    #14 0x5d55ea in PyEval_EvalCode (/usr/bin/python3.12+0x5d55ea) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+    #15 0x608732 in PyRun_StringFlags (/usr/bin/python3.12+0x608732) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+    #16 0x6b40dd in PyRun_SimpleStringFlags (/usr/bin/python3.12+0x6b40dd) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+    #17 0x6bcda0 in Py_RunMain (/usr/bin/python3.12+0x6bcda0) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+    #18 0x6bc7bc in Py_BytesMain (/usr/bin/python3.12+0x6bc7bc) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+    #19 0x7dd5f34d81c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #20 0x7dd5f34d828a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #21 0x657a04 in _start (/usr/bin/python3.12+0x657a04) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+
+0x503000068e80 is located 0 bytes after 32-byte region [0x503000068e60,0x503000068e80)
+allocated by thread T0 here:
+    #0 0x7dd5f38f3548 in operator new(unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:95
+    #1 0x7dd5e9001029 in std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >* google::protobuf::Arena::CreateInternal<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >>(google::protobuf::Arena*, std::integral_constant<bool, false>) /src/opencv-4.13.0/3rdparty/protobuf/src/google/protobuf/arena.h:696
+    #2 0x7dd5e9001029 in std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >* google::protobuf::Arena::Create<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >>(google::protobuf::Arena*) /src/opencv-4.13.0/3rdparty/protobuf/src/google/protobuf/arena.h:315
+    #3 0x7dd5e9001029 in std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >* google::protobuf::internal::ArenaStringPtr::MutableSlow<>(google::protobuf::Arena*) /src/opencv-4.13.0/3rdparty/protobuf/src/google/protobuf/arenastring.cc:157
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:115 in memcpy
+Shadow bytes around the buggy address:
+  0x503000068c00: 00 fa fa fa 00 00 00 07 fa fa fd fd fd fd fa fa
+  0x503000068c80: 00 00 00 fa fa fa 00 00 00 07 fa fa 00 00 00 00
+  0x503000068d00: fa fa 00 00 00 00 fa fa 00 00 00 00 fa fa 00 00
+  0x503000068d80: 00 00 fa fa 00 00 00 00 fa fa 00 00 00 00 fa fa
+  0x503000068e00: 00 00 00 00 fa fa 00 00 00 00 fa fa 00 00 00 00
+=>0x503000068e80:[fa]fa 00 00 00 00 fa fa 00 00 00 00 fa fa fd fd
+  0x503000068f00: fd fa fa fa fd fd fd fa fa fa fd fd fd fa fa fa
+  0x503000068f80: fd fd fd fa fa fa fd fd fd fa fa fa fd fd fd fa
+  0x503000069000: fa fa fd fd fd fa fa fa fd fd fd fa fa fa fd fd
+  0x503000069080: fd fa fa fa fd fd fd fa fa fa 00 00 01 fa fa fa
+  0x503000069100: 00 00 03 fa fa fa 00 00 06 fa fa fa 00 00 03 fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1==ABORTING

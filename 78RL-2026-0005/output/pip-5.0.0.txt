@@ -1,0 +1,6 @@
+# pip install opencv-python-headless -- the PyPI wheel, no OpenCV build performed
+OpenCV 5.0.0
+
+  run 1 exit status: 139
+  run 2 exit status: 139
+  run 3 exit status: 139

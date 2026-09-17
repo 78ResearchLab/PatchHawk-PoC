@@ -1,0 +1,14 @@
+# Ubuntu 24.04, apt install python3-opencv -- no OpenCV build performed
+OpenCV 4.6.0
+
+$ python3 -c "import cv2; cv2.imread("poc.pam", cv2.IMREAD_GRAYSCALE)"  x5
+double free or corruption (out)
+  run 1 exit status: 134
+double free or corruption (out)
+  run 2 exit status: 134
+double free or corruption (out)
+  run 3 exit status: 134
+double free or corruption (out)
+  run 4 exit status: 134
+double free or corruption (out)
+  run 5 exit status: 134

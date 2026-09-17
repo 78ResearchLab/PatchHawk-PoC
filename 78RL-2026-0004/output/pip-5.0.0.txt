@@ -1,0 +1,13 @@
+# pip install opencv-python-headless -- the PyPI wheel, no OpenCV build performed
+OpenCV 5.0.0
+
+double free or corruption (out)
+  run 1 exit status: 134
+double free or corruption (out)
+  run 2 exit status: 134
+double free or corruption (out)
+  run 3 exit status: 134
+double free or corruption (out)
+  run 4 exit status: 134
+double free or corruption (out)
+  run 5 exit status: 134

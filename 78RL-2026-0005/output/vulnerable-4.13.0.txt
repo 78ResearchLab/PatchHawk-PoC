@@ -1,0 +1,9 @@
+--- shipped CLI: opencv_model_diagnostics -m poc.onnx ---
+bash: line 3:     9 Segmentation fault      (core dumped) LD_LIBRARY_PATH=/opt/ocv-4.13.0/lib /opt/ocv-4.13.0/bin/opencv_model_diagnostics -m=/poc/poc.onnx
+exit status: 139
+
+--- public Python API: cv2.dnn.readNetFromONNX ---
+OpenCV 4.13.0
+[ERROR:0@0.123] global onnx_importer.cpp:909 populateNet DNN/ONNX: can't find layer for output name: 'Y'. Does model imported properly?
+model LOADED, layers: 0
+exit status: 0

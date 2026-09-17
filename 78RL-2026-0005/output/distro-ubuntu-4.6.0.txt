@@ -1,0 +1,6 @@
+# Ubuntu 24.04, apt install python3-opencv -- no OpenCV build performed
+OpenCV 4.6.0
+
+  run 1 exit status: 139
+  run 2 exit status: 139
+  run 3 exit status: 139

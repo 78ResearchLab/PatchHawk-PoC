@@ -1,0 +1,4 @@
+OpenCV 4.14.0
+imread returned: (2, 512)
+returned normally
+exit status: 0

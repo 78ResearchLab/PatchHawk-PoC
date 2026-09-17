@@ -1,0 +1,60 @@
+OpenCV 4.13.0
+=================================================================
+==1==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x5190002007c9 at pc 0x73a8821d0117 bp 0x7ffff3eb8350 sp 0x7ffff3eb8340
+WRITE of size 1 at 0x5190002007c9 thread T0
+    #0 0x73a8821d0116 in basic_conversion /src/opencv-4.13.0/modules/imgcodecs/src/grfmt_pam.cpp:189
+    #1 0x73a8821d4488 in cv::PAMDecoder::readData(cv::Mat&) /src/opencv-4.13.0/modules/imgcodecs/src/grfmt_pam.cpp:639
+    #2 0x73a88205507c in imread_ /src/opencv-4.13.0/modules/imgcodecs/src/loadsave.cpp:602
+    #3 0x73a882057066 in cv::imread(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, int) /src/opencv-4.13.0/modules/imgcodecs/src/loadsave.cpp:762
+    #4 0x73a892a84aaf in pyopencv_cv_imread /bsan/4.13.0/modules/python_bindings_generator/pyopencv_generated_funcs.h:9720
+    #5 0x58216e  (/usr/bin/python3.12+0x58216e) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+    #6 0x548fb4 in _PyObject_MakeTpCall (/usr/bin/python3.12+0x548fb4) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+    #7 0x5d710e in _PyEval_EvalFrameDefault (/usr/bin/python3.12+0x5d710e) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+    #8 0x5d55ea in PyEval_EvalCode (/usr/bin/python3.12+0x5d55ea) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+    #9 0x608732 in PyRun_StringFlags (/usr/bin/python3.12+0x608732) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+    #10 0x6b40dd in PyRun_SimpleStringFlags (/usr/bin/python3.12+0x6b40dd) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+    #11 0x6bcda0 in Py_RunMain (/usr/bin/python3.12+0x6bcda0) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+    #12 0x6bc7bc in Py_BytesMain (/usr/bin/python3.12+0x6bc7bc) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+    #13 0x73a895c4e1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #14 0x73a895c4e28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #15 0x657a04 in _start (/usr/bin/python3.12+0x657a04) (BuildId: 337d65cf00021797985cc9f77c0cc334a9fbeb38)
+
+0x5190002007c9 is located 1 bytes after 1096-byte region [0x519000200380,0x5190002007c8)
+allocated by thread T0 here:
+    #0 0x73a8960689c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x73a874a80818 in cv::fastMalloc(unsigned long) /src/opencv-4.13.0/modules/core/src/alloc.cpp:160
+    #2 0x73a874a80818 in cv::fastMalloc(unsigned long) /src/opencv-4.13.0/modules/core/src/alloc.cpp:130
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /src/opencv-4.13.0/modules/imgcodecs/src/grfmt_pam.cpp:189 in basic_conversion
+Shadow bytes around the buggy address:
+  0x519000200500: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x519000200580: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x519000200600: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x519000200680: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x519000200700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x519000200780: 00 00 00 00 00 00 00 00 00[fa]fa fa fa fa fa fa
+  0x519000200800: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x519000200880: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x519000200900: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x519000200980: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x519000200a00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1==ABORTING

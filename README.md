@@ -14,3 +14,5 @@ Follow [PatchHawk on X](https://x.com/patchhawk_) for updates.
 | 7-Zip | 26.02 | [78RL-2026-0002](78RL-2026-0002/README.md) | Split WIM volume index out-of-bounds read reached while extracting |
 | 7-Zip | 26.02 | [78RL-2026-0003](78RL-2026-0003/README.md) | Split cabinet folder index null dereference in the decompression loop |
 | Redis | 8.10.0 | [CVE-2026-62356](CVE-2026-62356/README.md) | Count-Min Sketch integer overflow leading to an out-of-bounds write |
+| OpenCV | 4.13.0 | [78RL-2026-0004](78RL-2026-0004/README.md) | A two-channel PAM image read as greyscale writes past the image buffer |
+| OpenCV | 4.13.0 | [78RL-2026-0005](78RL-2026-0005/README.md) | An ONNX tensor whose shape claims more data than the file carries |

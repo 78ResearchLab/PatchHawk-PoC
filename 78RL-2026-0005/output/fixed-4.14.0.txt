@@ -1,0 +1,20 @@
+--- shipped CLI: opencv_model_diagnostics -m poc.onnx ---
+terminate called after throwing an instance of 'cv::Exception'
+  what():  OpenCV(4.14.0) /src/opencv-4.14.0/modules/dnn/src/onnx/onnx_graph_simplifier.cpp:1753: error: (-2:Unspecified error) in function 'cv::dnn::dnn4_v20260709::getMatFromTensor(const opencv_onnx::TensorProto&)::<lambda(size_t)>'
+> DNN/ONNX: tensor payload is smaller than its declared shape (expected: 'available_elems >= total_elems'), where
+>     'available_elems' is 1
+> must be greater than or equal to
+>     'total_elems' is 1000000
+
+exit status: 134
+
+--- public Python API: cv2.dnn.readNetFromONNX ---
+bash: line 3:     9 Aborted                 (core dumped) LD_LIBRARY_PATH=/opt/ocv-4.14.0/lib /opt/ocv-4.14.0/bin/opencv_model_diagnostics -m=/poc/poc.onnx
+OpenCV 4.14.0
+rejected with cv2.error:
+  OpenCV(4.14.0) /src/opencv-4.14.0/modules/dnn/src/onnx/onnx_graph_simplifier.cpp:1753: error: (-2:Unspecified error) in function 'cv::dnn::dnn4_v20260709::getMatFromTensor(const opencv_onnx::TensorProto&)::<lambda(size_t)>'
+  > DNN/ONNX: tensor payload is smaller than its declared shape (expected: 'available_elems >= total_elems'), where
+  >     'available_elems' is 1
+  > must be greater than or equal to
+  >     'total_elems' is 1000000
+exit status: 0
