@@ -1,0 +1,24 @@
+# Both gates are intentional: this lab uses a parent cache and a permissive
+# shipped test helper. It does not model every production authentication setup.
+http_port 3128
+auth_param basic program @PREFIX@/libexec/basic_fake_auth
+auth_param basic children 2 startup=1 idle=1
+auth_param basic realm squid-poc
+auth_param basic credentialsttl 1 second
+acl authed proxy_auth REQUIRED
+http_access allow authed
+http_access deny all
+
+cache_peer peerstub parent 8080 0 no-query no-digest no-netdb-exchange login=*:s3cr3t
+never_direct allow all
+
+visible_hostname squid-poc
+cache_effective_user squid
+pid_filename @PREFIX@/var/run/squid.pid
+coredump_dir @PREFIX@/var/cache
+access_log stdio:@PREFIX@/var/logs/access.log
+cache_log @PREFIX@/var/logs/cache.log
+cache deny all
+debug_options ALL,1 93,3
+dns_nameservers 127.0.0.11
+shutdown_lifetime 1 second

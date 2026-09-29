@@ -1,0 +1,12 @@
+Squid 7.7 (fixed); synthetic usernames
+[runner] baseline request
+[client] username bytes: 100
+[client] request: GET http://peerstub/poc HTTP/1.1
+[client] response: HTTP/1.1 200 OK
+[runner] long-username request
+[client] username bytes: 300
+[client] request: GET http://peerstub/poc HTTP/1.1
+[client] response: HTTP/1.1 500 Internal Server Error
+[runner] container: running exit=0
+2026/09/29 07:18:59.919| 93,3| ../../src/base/AsyncJobCalls.h(178) dial: AsyncJob::start threw exception: peer login credentials too long
+2026/09/29 07:18:59.920| 93,2| AsyncJob.cc(145) callException: peer login credentials too long

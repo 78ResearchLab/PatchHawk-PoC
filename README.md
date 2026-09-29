@@ -17,3 +17,4 @@ Follow [PatchHawk on X](https://x.com/patchhawk_) for updates.
 | OpenCV | 4.13.0 | [78RL-2026-0004](78RL-2026-0004/README.md) | A two-channel PAM image read as greyscale writes past the image buffer |
 | OpenCV | 4.13.0 | [78RL-2026-0005](78RL-2026-0005/README.md) | An ONNX tensor whose shape claims more data than the file carries |
 | OpenImageIO | 3.1.15.0 | [78RL-2026-0006](78RL-2026-0006/README.md) | A DDS header-controlled copy writes past a four-byte stack variable |
+| Squid | 7.6 | [GHSA-j9pf-q9f6-v44c](GHSA-j9pf-q9f6-v44c/README.md) | Basic-auth peer forwarding overflows a stack buffer when a long username is accepted |
