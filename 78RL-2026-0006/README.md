@@ -4,9 +4,8 @@
 
 | | |
 |---|---|
-| **Tested vulnerable** | OpenImageIO 3.1.15.0 |
+| **Affected** | OpenImageIO 3.1.15.0 |
 | **Fixed in** | OpenImageIO 3.1.16.0 |
-| **Upstream references** | [PR #5287](https://github.com/AcademySoftwareFoundation/OpenImageIO/pull/5287), fix commit [`d11941e`](https://github.com/AcademySoftwareFoundation/OpenImageIO/commit/d11941e), and the [3.1.16.0 release notes](https://github.com/AcademySoftwareFoundation/OpenImageIO/releases/tag/v3.1.16.0) |
 | **Advisory** | No matching CVE or dedicated advisory was found as of 2026-09-29. `78RL-2026-0006` is a project-assigned identifier so this reproducer can be cited |
 | **Severity** | Not assigned by upstream |
 | **Class** | CWE-121 / CWE-787 stack out-of-bounds **write** |
@@ -63,6 +62,10 @@ The release also rejects uncompressed native pixel sizes outside the range of
 1 to 16 bytes. This PoC deliberately uses eight bytes, which remains inside
 that range. The differential result therefore exercises the copy clamp itself,
 rather than being stopped by the new header sanity check.
+
+See the [fix commit](https://github.com/AcademySoftwareFoundation/OpenImageIO/commit/d11941e)
+and [3.1.16.0 release notes](https://github.com/AcademySoftwareFoundation/OpenImageIO/releases/tag/v3.1.16.0)
+for the upstream change.
 
 ## How the proof of concept works
 
