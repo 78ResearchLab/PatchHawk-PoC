@@ -1,0 +1,62 @@
+2026/09/01 07:51:24| Processing Configuration File: /h13conf/squid-s1.conf (depth 0)
+2026/09/01 07:51:24| Created PID file (/opt/squid/var/run/squid.pid)
+2026/09/01 07:51:24| Set Current Directory to /opt/squid/var/cache
+2026/09/01 07:51:24| Starting Squid Cache version 7.7 for x86_64-pc-linux-gnu...
+2026/09/01 07:51:24| Service Name: squid
+2026/09/01 07:51:24| Process ID 1
+2026/09/01 07:51:24| Process Roles: master worker
+2026/09/01 07:51:24| With 1024 file descriptors available
+2026/09/01 07:51:24| Initializing IP Cache...
+2026/09/01 07:51:24| DNS IPv6 socket created at [::], FD 8
+2026/09/01 07:51:24| DNS IPv4 socket created at 0.0.0.0, FD 9
+2026/09/01 07:51:24| Adding nameserver 127.0.0.11 from squid.conf
+2026/09/01 07:51:24| helperOpenServers: Starting 1/2 'basic_fake_auth' processes
+2026/09/01 07:51:24| Logfile: opening log /opt/squid/var/logs/access.log
+2026/09/01 07:51:24| WARNING: log name now starts with a module name. Use 'stdio:/opt/squid/var/logs/access.log'
+2026/09/01 07:51:24| Store logging disabled
+2026/09/01 07:51:24| Swap maxSize 0 + 262144 KB, estimated 20164 objects
+2026/09/01 07:51:24| Target number of buckets: 1008
+2026/09/01 07:51:24| Using 8192 Store buckets
+2026/09/01 07:51:24| Max Mem  size: 262144 KB
+2026/09/01 07:51:24| Max Swap size: 0 KB
+2026/09/01 07:51:24| Using Least Load store dir selection
+2026/09/01 07:51:24| Set Current Directory to /opt/squid/var/cache
+2026/09/01 07:51:24| Finished loading MIME types and icons.
+2026/09/01 07:51:24| Squid plugin modules loaded: 0
+2026/09/01 07:51:24| Accepting HTTP Socket connections at conn5 local=[::]:3128 remote=[::] FD 13 flags=9
+    listening port: 3128
+2026/09/01 07:51:24| Configuring Parent peerstub
+    current cache_peer probe: peerstub
+2026/09/01 07:51:25| storeLateRelease: released 0 objects
+2026/09/01 07:51:26.873| 11,2| client_side.cc(1288) parseHttpRequest: HTTP Client conn10 local=172.31.0.3:3128 remote=172.31.0.4:50914 FD 11 flags=1
+2026/09/01 07:51:26.873| 11,2| client_side.cc(1289) parseHttpRequest: HTTP Client REQUEST:
+---------
+GET http://peerstub/h13 HTTP/1.1
+Host: peerstub
+Proxy-Authorization: Basic QUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBOnB3
+Connection: close
+
+
+----------
+2026/09/01 07:51:26.876| 93,3| ../../src/base/AsyncJobCalls.h(178) dial: AsyncJob::start threw exception: peer login credentials too long
+    exception location: http.cc(1851) httpFixupAuthentication
+2026/09/01 07:51:26.876| 93,2| AsyncJob.cc(145) callException: peer login credentials too long
+    exception location: http.cc(1851) httpFixupAuthentication
+2026/09/01 07:51:26.876| 11,2| Stream.cc(274) sendStartOfMessage: HTTP Client conn10 local=172.31.0.3:3128 remote=172.31.0.4:50914 FD 11 flags=1
+2026/09/01 07:51:26.876| 11,2| Stream.cc(275) sendStartOfMessage: HTTP Client REPLY:
+---------
+HTTP/1.1 500 Internal Server Error
+Server: squid/7.7
+Mime-Version: 1.0
+Date: Tue, 01 Sep 2026 07:51:26 GMT
+Content-Type: text/html;charset=utf-8
+Content-Length: 3375
+X-Squid-Error: ERR_CANNOT_FORWARD 0
+Vary: Accept-Language
+Content-Language: en
+Cache-Status: h13-squid;fwd=miss;detail=no-cache
+Via: 1.1 h13-squid (squid/7.7)
+Connection: close
+
+
+----------

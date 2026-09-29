@@ -1,0 +1,82 @@
+=================================================================
+==1==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7ecae527847f at pc 0x5f6e19f1aece bp 0x7ffd1d34f460 sp 0x7ffd1d34f450
+WRITE of size 1 at 0x7ecae527847f thread T0
+    #0 0x5f6e19f1aecd in encode_raw /src/squid-7.6/lib/base64.c:202
+    #1 0x5f6e19f1ba58 in base64_encode_update /src/squid-7.6/lib/base64.c:288
+    #2 0x5f6e19878047 in httpFixupAuthentication /src/squid-7.6/src/http.cc:1848
+    #3 0x5f6e19878047 in HttpStateData::httpBuildRequestHeader(HttpRequest*, StoreEntry*, RefCount<AccessLogEntry> const&, HttpHeader*, Http::StateFlags const&) /src/squid-7.6/src/http.cc:2027
+    #4 0x5f6e1988d6ca in HttpStateData::buildRequestPrefix(MemBuf*) /src/squid-7.6/src/http.cc:2381
+    #5 0x5f6e19890167 in HttpStateData::sendRequest() /src/squid-7.6/src/http.cc:2481
+    #6 0x5f6e198907dc in HttpStateData::start() /src/squid-7.6/src/http.cc:2534
+    #7 0x5f6e19bf3c06 in NullaryMemFunT<AsyncJob>::doDial() (/opt/squid/sbin/squid+0x932c06) (BuildId: d49931f4d14c49cd5cca5223f980818dab0c9387)
+    #8 0x5f6e19bf2d44 in JobDialer<AsyncJob>::dial(AsyncCall&) ../../src/base/AsyncJobCalls.h:176
+    #9 0x5f6e19bf3b15 in AsyncCallT<NullaryMemFunT<AsyncJob> >::fire() ../../src/base/AsyncCall.h:148
+    #10 0x5f6e19be1c1d in AsyncCall::make() /src/squid-7.6/src/base/AsyncCall.cc:44
+    #11 0x5f6e19be75d5 in AsyncCallQueue::fire() /src/squid-7.6/src/base/AsyncCallQueue.cc:27
+    #12 0x5f6e195f5712 in EventLoop::dispatchCalls() /src/squid-7.6/src/EventLoop.cc:144
+    #13 0x5f6e195f5fce in EventLoop::runOnce() /src/squid-7.6/src/EventLoop.cc:121
+    #14 0x5f6e195f62e8 in EventLoop::run() /src/squid-7.6/src/EventLoop.cc:83
+    #15 0x5f6e198ca675 in SquidMain(int, char**) /src/squid-7.6/src/main.cc:1706
+    #16 0x5f6e198cb4e6 in SquidMainSafe /src/squid-7.6/src/main.cc:1351
+    #17 0x5f6e198cb4e6 in main /src/squid-7.6/src/main.cc:1339
+    #18 0x7ecae6f361c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: 328820b908de8ea1ef79afa8995e302e819163d7)
+    #19 0x7ecae6f3628a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: 328820b908de8ea1ef79afa8995e302e819163d7)
+    #20 0x5f6e1956b9a4 in _start (/opt/squid/sbin/squid+0x2aa9a4) (BuildId: d49931f4d14c49cd5cca5223f980818dab0c9387)
+
+Address 0x7ecae527847f is located in stack of thread T0 at offset 1151 in frame
+    #0 0x5f6e19876099 in HttpStateData::httpBuildRequestHeader(HttpRequest*, StoreEntry*, RefCount<AccessLogEntry> const&, HttpHeader*, Http::StateFlags const&) /src/squid-7.6/src/http.cc:1909
+
+  This frame has 18 object(s):
+    [48, 49) '__c' (line 1904)
+    [64, 66) '<unknown>'
+    [80, 88) 'pos' (line 1916)
+    [112, 120) '<unknown>'
+    [144, 160) 'ctx' (line 2016)
+    [176, 192) 'ctx' (line 1834)
+    [208, 232) '<unknown>'
+    [272, 296) 'strConnection' (line 1932)
+    [336, 360) '<unknown>'
+    [400, 424) 'strSurrogate' (line 1952)
+    [464, 488) 'strFwd' (line 1962)
+    [528, 552) 'url' (line 1974)
+    [592, 616) 'authority' (line 2007)
+    [656, 680) 'tmp' (line 2039)
+    [720, 744) 'authority' (line 2223)
+    [784, 816) '<unknown>'
+    [848, 880) '<unknown>'
+    [912, 1087) 'loginbuf' (line 1832) <== Memory access at offset 1151 overflows this variable
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow /src/squid-7.6/lib/base64.c:202 in encode_raw
+Shadow bytes around the buggy address:
+  0x7ecae5278180: f2 f2 00 00 00 f2 f2 f2 f2 f2 f8 f8 f8 f2 f2 f2
+  0x7ecae5278200: f2 f2 00 00 00 f2 f2 f2 f2 f2 00 00 00 f2 f2 f2
+  0x7ecae5278280: f2 f2 00 00 00 f2 f2 f2 f2 f2 f8 f8 f8 f2 f2 f2
+  0x7ecae5278300: f2 f2 00 00 00 00 f2 f2 f2 f2 00 00 00 00 f2 f2
+  0x7ecae5278380: f2 f2 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x7ecae5278400: 00 00 00 00 00 00 00 07 f3 f3 f3 f3 f3 f3 f3[f3]
+  0x7ecae5278480: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7ecae5278500: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7ecae5278580: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7ecae5278600: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x7ecae5278680: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1==ABORTING

