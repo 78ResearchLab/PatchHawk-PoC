@@ -1,0 +1,71 @@
+=================================================================
+[harness] subimage 0: 1x1x1 nchans=4 format=uint8
+[harness] allocating 4 bytes for read_image()
+==10==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x76c017c3f430 at pc 0x76c01c4613f0 bp 0x7ffe268c92c0 sp 0x7ffe268c92b0
+WRITE of size 8 at 0x76c017c3f430 thread T0
+    #0 0x76c01c4613ef in memcpy /usr/include/x86_64-linux-gnu/bits/string_fortified.h:29
+    #1 0x76c01c4613ef in OpenImageIO::v3_1::DDSInput::internal_readimg(unsigned char*, unsigned long, unsigned long, unsigned long) /src/OpenImageIO-3.1.15.0/src/dds.imageio/ddsinput.cpp:995
+    #2 0x76c01c461b6f in OpenImageIO::v3_1::DDSInput::readimg_scanlines() /src/OpenImageIO-3.1.15.0/src/dds.imageio/ddsinput.cpp:1019
+    #3 0x76c01c468849 in OpenImageIO::v3_1::DDSInput::read_native_scanline(int, int, int, int, void*) /src/OpenImageIO-3.1.15.0/src/dds.imageio/ddsinput.cpp:1058
+    #4 0x76c01c0c3919 in OpenImageIO::v3_1::ImageInput::read_native_scanlines(int, int, int, int, int, void*) /src/OpenImageIO-3.1.15.0/src/libOpenImageIO/imageinput.cpp:491
+    #5 0x76c01c0db121 in OpenImageIO::v3_1::ImageInput::read_native_scanlines(int, int, int, int, OpenImageIO::v3_1::span<std::byte, 18446744073709551615ul>) /src/OpenImageIO-3.1.15.0/src/libOpenImageIO/imageinput.cpp:565
+    #6 0x76c01c0e02c0 in OpenImageIO::v3_1::ImageInput::read_scanlines(int, int, int, int, int, int, int, OpenImageIO::v3_1::TypeDesc, void*, long, long) /src/OpenImageIO-3.1.15.0/src/libOpenImageIO/imageinput.cpp:406
+    #7 0x76c01c0d1e0f in OpenImageIO::v3_1::ImageInput::read_image(int, int, int, int, OpenImageIO::v3_1::TypeDesc, void*, long, long, long, bool (*)(void*, float), void*) /src/OpenImageIO-3.1.15.0/src/libOpenImageIO/imageinput.cpp:1168
+    #8 0x63fe1c634008 in main /harness/oiio_read.cpp:37
+    #9 0x76c01aa571c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #10 0x76c01aa5728a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #11 0x63fe1c633464 in _start (/usr/local/bin/oiio-read-3.1.15.0+0x2464) (BuildId: 1aa0e16f866ca927702c897acf424a848cc137e3)
+
+Address 0x76c017c3f430 is located in stack of thread T0 at offset 48 in frame
+    #0 0x76c01c46021d in OpenImageIO::v3_1::DDSInput::internal_readimg(unsigned char*, unsigned long, unsigned long, unsigned long) /src/OpenImageIO-3.1.15.0/src/dds.imageio/ddsinput.cpp:937
+
+  This frame has 13 object(s):
+    [48, 52) 'pixel' (line 994) <== Memory access at offset 48 partially overflows this variable
+    [64, 68) 'channelCount' (line 195)
+    [80, 84) 'widthInBlocks' (line 198)
+    [96, 100) 'width' (line 936)
+    [112, 116) 'height' (line 936)
+    [128, 132) 'cmp' (line 936)
+    [144, 152) 'tmp' (line 942)
+    [176, 184) 'rgba' (line 936)
+    [208, 216) 'blocks' (line 936)
+    [240, 248) 'blockSize' (line 194)
+    [272, 304) 'opt' (line 200)
+    [336, 408) '<unknown>'
+    [448, 480) '<unknown>'
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow /usr/include/x86_64-linux-gnu/bits/string_fortified.h:29 in memcpy
+Shadow bytes around the buggy address:
+  0x76c017c3f180: f5 f5 f5 f5 f5 f5 f5 f5 00 00 00 00 00 00 00 00
+  0x76c017c3f200: f1 f1 f1 f1 00 00 f2 f2 00 00 f2 f2 00 00 00 00
+  0x76c017c3f280: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x76c017c3f300: f3 f3 f3 f3 f3 f3 f3 f3 00 00 00 00 00 00 00 00
+  0x76c017c3f380: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x76c017c3f400: f1 f1 f1 f1 f1 f1[04]f2 04 f2 04 f2 04 f2 04 f2
+  0x76c017c3f480: 04 f2 00 f2 f2 f2 00 f2 f2 f2 00 f2 f2 f2 00 f2
+  0x76c017c3f500: f2 f2 00 00 00 00 f2 f2 f2 f2 00 00 00 00 00 00
+  0x76c017c3f580: 00 00 00 f2 f2 f2 f2 f2 00 00 00 00 f3 f3 f3 f3
+  0x76c017c3f600: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x76c017c3f680: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==10==ABORTING
+[runner] exit status: 99

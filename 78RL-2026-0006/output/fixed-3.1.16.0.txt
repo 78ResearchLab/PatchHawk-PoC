@@ -1,0 +1,4 @@
+[harness] subimage 0: 1x1x1 nchans=4 format=uint8
+[harness] allocating 4 bytes for read_image()
+[harness] read_image ok (4 bytes)
+[runner] exit status: 0
