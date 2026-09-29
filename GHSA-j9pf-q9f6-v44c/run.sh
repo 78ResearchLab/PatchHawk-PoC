@@ -52,13 +52,15 @@ run_version() {
 
     echo "[runner] Squid ${version} (${label})"
     for ((attempt=0; attempt<10; attempt++)); do
-        docker run --rm --network "$NETWORK" "$IMAGE" python3 /poc/client.py 100 \
+        docker run --rm --network "$NETWORK" -v "$HERE:/poc-input:ro" \
+            "$IMAGE" python3 /poc/client.py /poc-input/baseline.http \
             > "$SCRATCH/baseline-${version}.txt" 2>&1 || true
         if grep -q 'HTTP/1.1 200' "$SCRATCH/baseline-${version}.txt"; then break; fi
         sleep 1
     done
     grep -q 'HTTP/1.1 200' "$SCRATCH/baseline-${version}.txt"
-    docker run --rm --network "$NETWORK" "$IMAGE" python3 /poc/client.py 300 \
+    docker run --rm --network "$NETWORK" -v "$HERE:/poc-input:ro" \
+        "$IMAGE" python3 /poc/client.py /poc-input/poc.http \
         > "$SCRATCH/client-${version}.txt" 2>&1 || true
     sleep 2
     status="$(docker inspect -f '{{.State.Status}} exit={{.State.ExitCode}}' "$PROXY")"

@@ -1,2 +1,4 @@
 # Preserve the original ASan and Squid logs byte-for-byte (including CRLF/space).
 evidence/* -whitespace
+# Keep the exact CRLF request bytes in the checked-in HTTP payloads.
+*.http -text

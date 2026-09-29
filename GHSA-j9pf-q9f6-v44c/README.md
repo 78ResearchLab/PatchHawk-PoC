@@ -72,18 +72,23 @@ also guards other Base64 buffers. The guard shipped in the
 
 ## How the proof of concept works
 
-[`build/client.py`](build/client.py) sends a synthetic HTTP request through
-Squid with a Basic-auth username of either 100 or 300 bytes. The lab
-configuration in [`build/squid.conf.in`](build/squid.conf.in) has both gates
-needed to reach this path: a parent `cache_peer` with `login=*:s3cr3t`, and
+[`poc.http`](poc.http) is the checked-in trigger request, containing a synthetic
+300-byte Basic-auth username. [`baseline.http`](baseline.http) is the 100-byte
+control request. [`make-poc.py`](make-poc.py) deterministically generates both
+files, and [`build/client.py`](build/client.py) sends their exact bytes through
+Squid. The trigger file is 504 bytes; its SHA-256 is
+`c709da60ec31dab1dec081e7805743aeb1f735fca14ab3951605ad42781dc171`.
+
+The lab configuration in [`build/squid.conf.in`](build/squid.conf.in) has both
+gates needed to reach this path: a parent `cache_peer` with `login=*:s3cr3t`, and
 Squid's shipped `basic_fake_auth` helper, which accepts the long username.
 [`build/peer.py`](build/peer.py) acts as the private HTTP parent.
 
 [`run.sh`](run.sh) starts the peer and each Squid version, first checks that
 the 100-byte request reaches the peer and returns HTTP 200, then sends the
-300-byte trigger. It captures Squid's logs and checks for an ASan stack write
-and process exit on 7.6 versus a logged length rejection and surviving process
-on 7.7. The checked-in [7.6](output/vulnerable-7.6.txt) and
+checked-in 300-byte trigger. It captures Squid's logs and checks for an ASan
+stack write and process exit on 7.6 versus a logged length rejection and
+surviving process on 7.7. The checked-in [7.6](output/vulnerable-7.6.txt) and
 [7.7](output/fixed-7.7.txt) summaries were produced by this script on
 2026-09-29.
 
@@ -95,6 +100,15 @@ directory, build both releases and run the comparison:
 ```bash
 docker build --build-arg JOBS=4 -t squid-auth-poc:7.6-7.7 build/
 ./run.sh
+```
+
+To verify the committed request bytes, regenerate both files into a scratch
+directory and compare them:
+
+```bash
+python3 make-poc.py /tmp/squid-auth-requests
+cmp baseline.http /tmp/squid-auth-requests/baseline.http
+cmp poc.http /tmp/squid-auth-requests/poc.http
 ```
 
 The script creates a private internal Docker network and publishes no proxy
