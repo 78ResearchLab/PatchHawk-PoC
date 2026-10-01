@@ -1,0 +1,55 @@
+$ /opt/ffprobe-9.0.1 -hide_banner -v error -max_alloc 8589934592 -f ogg -show_packets /data/continued-4g.ogg 
+[runner] exit status: 134
+[stderr]
+=================================================================
+==22==ERROR: AddressSanitizer: unknown-crash on address 0x701c7686713f at pc 0x701c7a3c7303 bp 0x7ffd4b86dc10 sp 0x7ffd4b86d3b8
+WRITE of size 31895 at 0x701c7686713f thread T0
+    #0 0x701c7a3c7302 in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:115
+    #1 0x5a21f1aa06ea in memcpy /usr/include/x86_64-linux-gnu/bits/string_fortified.h:29
+    #2 0x5a21f1aa06ea in avio_read src/libavformat/aviobuf.c:652
+    #3 0x5a21f218dc7d in ogg_read_page src/libavformat/oggdec.c:409
+    #4 0x5a21f21903bc in ogg_packet src/libavformat/oggdec.c:521
+    #5 0x5a21f21995a6 in ogg_read_header src/libavformat/oggdec.c:746
+    #6 0x5a21f1b5a08a in avformat_open_input src/libavformat/demux.c:323
+    #7 0x5a21effad299 in open_input_file src/fftools/ffprobe.c:2578
+    #8 0x5a21effad299 in probe_file src/fftools/ffprobe.c:2701
+    #9 0x5a21effad299 in main src/fftools/ffprobe.c:3510
+    #10 0x701c799e41c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #11 0x701c799e428a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #12 0x5a21effcbb74 in _start (/opt/ffprobe-9.0.1+0xaf9db74) (BuildId: 947a80e43e5a4d175def7d5525a9b05727ad0710)
+
+Address 0x701c7686713f is a wild pointer inside of access range of size 0x000000007c97.
+SUMMARY: AddressSanitizer: unknown-crash ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:115 in memcpy
+Shadow bytes around the buggy address:
+  0x701c76866e80: fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe
+  0x701c76866f00: fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe
+  0x701c76866f80: fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe
+  0x701c76867000: fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe
+  0x701c76867080: fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe
+=>0x701c76867100: fe fe fe fe fe fe fe[fe]fe fe fe fe fe fe fe fe
+  0x701c76867180: fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe
+  0x701c76867200: fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe
+  0x701c76867280: fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe
+  0x701c76867300: fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe
+  0x701c76867380: fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==22==ABORTING
+timeout: the monitored command dumped core
