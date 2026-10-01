@@ -1,0 +1,17 @@
+src/libavfilter/af_firequalizer.c:739:18: runtime error: signed integer overflow: 1323000000 * 2 cannot be represented in type 'int'
+    #0 0x5814c53adf94 in config_input src/libavfilter/af_firequalizer.c:739
+    #1 0x5814c3d9ffc0 in ff_filter_config_links src/libavfilter/avfilter.c:443
+    #2 0x5814c3d9f87d in ff_filter_config_links src/libavfilter/avfilter.c:361
+    #3 0x5814c3d9f87d in ff_filter_config_links src/libavfilter/avfilter.c:361
+    #4 0x5814c3d9f87d in ff_filter_config_links src/libavfilter/avfilter.c:361
+    #5 0x5814c3dd0297 in graph_config_links src/libavfilter/avfiltergraph.c:257
+    #6 0x5814c3dd0297 in avfilter_graph_config src/libavfilter/avfiltergraph.c:1444
+    #7 0x5814c3b554b1 in configure_filtergraph src/fftools/ffmpeg_filter.c:2133
+    #8 0x5814c3b5ab97 in send_frame src/fftools/ffmpeg_filter.c:3191
+    #9 0x5814c3b5ab97 in filter_thread src/fftools/ffmpeg_filter.c:3348
+    #10 0x5814c3bcf833 in task_wrapper src/fftools/ffmpeg_sched.c:2776
+    #11 0x7f2b65715a41 in asan_thread_start ../../../../src/libsanitizer/asan/asan_interceptors.cpp:234
+    #12 0x7f2b64e41b83  (/lib/x86_64-linux-gnu/libc.so.6+0x9cb83) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #13 0x7f2b64ececc3 in __clone (/lib/x86_64-linux-gnu/libc.so.6+0x129cc3) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+
+[runner] exit status: 1

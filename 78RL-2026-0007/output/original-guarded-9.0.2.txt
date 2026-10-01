@@ -1,0 +1,10 @@
+[Parsed_firequalizer_0 @ 0x51100001a080] too large or non-finite delay, please decrease it.
+[Parsed_firequalizer_0 @ 0x51100001a080] Failed to configure input pad on Parsed_firequalizer_0
+[af#0:0 @ 0x51a000000080] Error reinitializing filters!
+[af#0:0 @ 0x51a000000080] Task finished with error code: -22 (Invalid argument)
+[af#0:0 @ 0x51a000000080] Terminating thread with return code -22 (Invalid argument)
+[aost#0:0/pcm_s16le @ 0x517000000780] [enc:pcm_s16le @ 0x510000001140] Could not open encoder before EOF
+[aost#0:0/pcm_s16le @ 0x517000000780] Task finished with error code: -22 (Invalid argument)
+[aost#0:0/pcm_s16le @ 0x517000000780] Terminating thread with return code -22 (Invalid argument)
+[out#0/null @ 0x511000000f40] Nothing was written into output file, because at least one of its streams received no packets.
+[runner] exit status: 234

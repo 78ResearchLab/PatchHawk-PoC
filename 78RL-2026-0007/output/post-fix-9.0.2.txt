@@ -1,0 +1,100 @@
+src/libavfilter/af_firequalizer.c:750:29: runtime error: signed integer overflow: -1074275984 * 2 cannot be represented in type 'int'
+    #0 0x643fce9cb218 in config_input src/libavfilter/af_firequalizer.c:750
+    #1 0x643fcd3bc9d0 in ff_filter_config_links src/libavfilter/avfilter.c:443
+    #2 0x643fcd3bc28d in ff_filter_config_links src/libavfilter/avfilter.c:361
+    #3 0x643fcd3bc28d in ff_filter_config_links src/libavfilter/avfilter.c:361
+    #4 0x643fcd3bc28d in ff_filter_config_links src/libavfilter/avfilter.c:361
+    #5 0x643fcd3ecca7 in graph_config_links src/libavfilter/avfiltergraph.c:257
+    #6 0x643fcd3ecca7 in avfilter_graph_config src/libavfilter/avfiltergraph.c:1444
+    #7 0x643fcd172711 in configure_filtergraph src/fftools/ffmpeg_filter.c:2133
+    #8 0x643fcd177df7 in send_frame src/fftools/ffmpeg_filter.c:3191
+    #9 0x643fcd177df7 in filter_thread src/fftools/ffmpeg_filter.c:3348
+    #10 0x643fcd1ecd23 in task_wrapper src/fftools/ffmpeg_sched.c:2723
+    #11 0x7125b14efa41 in asan_thread_start ../../../../src/libsanitizer/asan/asan_interceptors.cpp:234
+    #12 0x7125b0c1bb83  (/lib/x86_64-linux-gnu/libc.so.6+0x9cb83) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #13 0x7125b0ca8cc3 in __clone (/lib/x86_64-linux-gnu/libc.so.6+0x129cc3) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+
+=================================================================
+==8==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x53100008c7fc at pc 0x643fce9c5d05 bp 0x71259a4cf960 sp 0x71259a4cf950
+WRITE of size 4 at 0x53100008c7fc thread T17 (af#0:0)
+    #0 0x643fce9c5d04 in generate_kernel src/libavfilter/af_firequalizer.c:684
+    #1 0x643fce9cade7 in config_input src/libavfilter/af_firequalizer.c:837
+    #2 0x643fcd3bc9d0 in ff_filter_config_links src/libavfilter/avfilter.c:443
+    #3 0x643fcd3bc28d in ff_filter_config_links src/libavfilter/avfilter.c:361
+    #4 0x643fcd3bc28d in ff_filter_config_links src/libavfilter/avfilter.c:361
+    #5 0x643fcd3bc28d in ff_filter_config_links src/libavfilter/avfilter.c:361
+    #6 0x643fcd3ecca7 in graph_config_links src/libavfilter/avfiltergraph.c:257
+    #7 0x643fcd3ecca7 in avfilter_graph_config src/libavfilter/avfiltergraph.c:1444
+    #8 0x643fcd172711 in configure_filtergraph src/fftools/ffmpeg_filter.c:2133
+    #9 0x643fcd177df7 in send_frame src/fftools/ffmpeg_filter.c:3191
+    #10 0x643fcd177df7 in filter_thread src/fftools/ffmpeg_filter.c:3348
+    #11 0x643fcd1ecd23 in task_wrapper src/fftools/ffmpeg_sched.c:2723
+    #12 0x7125b14efa41 in asan_thread_start ../../../../src/libsanitizer/asan/asan_interceptors.cpp:234
+    #13 0x7125b0c1bb83  (/lib/x86_64-linux-gnu/libc.so.6+0x9cb83) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #14 0x7125b0ca8cc3 in __clone (/lib/x86_64-linux-gnu/libc.so.6+0x129cc3) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+
+0x53100008c7fc is located 4 bytes before 65544-byte region [0x53100008c800,0x53100009c808)
+allocated by thread T17 (af#0:0) here:
+    #0 0x7125b158df1d in posix_memalign ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
+    #1 0x643fd562203c in av_malloc src/libavutil/mem.c:107
+    #2 0x643fd56221e6 in av_malloc_array src/libavutil/mem.c:214
+    #3 0x643fce9ca370 in config_input src/libavfilter/af_firequalizer.c:820
+    #4 0x643fcd3bc9d0 in ff_filter_config_links src/libavfilter/avfilter.c:443
+    #5 0x643fcd3bc28d in ff_filter_config_links src/libavfilter/avfilter.c:361
+    #6 0x643fcd3bc28d in ff_filter_config_links src/libavfilter/avfilter.c:361
+    #7 0x643fcd3bc28d in ff_filter_config_links src/libavfilter/avfilter.c:361
+    #8 0x643fcd3ecca7 in graph_config_links src/libavfilter/avfiltergraph.c:257
+    #9 0x643fcd3ecca7 in avfilter_graph_config src/libavfilter/avfiltergraph.c:1444
+    #10 0x643fcd172711 in configure_filtergraph src/fftools/ffmpeg_filter.c:2133
+    #11 0x643fcd177df7 in send_frame src/fftools/ffmpeg_filter.c:3191
+    #12 0x643fcd177df7 in filter_thread src/fftools/ffmpeg_filter.c:3348
+    #13 0x643fcd1ecd23 in task_wrapper src/fftools/ffmpeg_sched.c:2723
+    #14 0x7125b14efa41 in asan_thread_start ../../../../src/libsanitizer/asan/asan_interceptors.cpp:234
+    #15 0x7125b0c1bb83  (/lib/x86_64-linux-gnu/libc.so.6+0x9cb83) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+
+Thread T17 (af#0:0) created by T0 here:
+    #0 0x7125b15861f9 in pthread_create ../../../../src/libsanitizer/asan/asan_interceptors.cpp:245
+    #1 0x643fcd1df859 in task_start src/fftools/ffmpeg_sched.c:415
+    #2 0x643fcd20319e in sch_start src/fftools/ffmpeg_sched.c:1773
+    #3 0x643fcd0e2c15 in transcode src/fftools/ffmpeg.c:896
+    #4 0x643fcd0e2c15 in main src/fftools/ffmpeg.c:1031
+    #5 0x7125b0ba91c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #6 0x7125b0ba928a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #7 0x643fcd0fd214 in _start (/opt/ffmpeg-9.0.2+0xb0c9214) (BuildId: 82c339d5a1b931bbffd432ccfc558855e3594b53)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow src/libavfilter/af_firequalizer.c:684 in generate_kernel
+Shadow bytes around the buggy address:
+  0x53100008c500: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x53100008c580: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x53100008c600: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x53100008c680: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x53100008c700: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+=>0x53100008c780: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa[fa]
+  0x53100008c800: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x53100008c880: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x53100008c900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x53100008c980: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x53100008ca00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==8==ABORTING
+timeout: the monitored command dumped core
+bash: line 5:     7 Aborted                 timeout 30s "/opt/ffmpeg-$1" -hide_banner -nostdin -loglevel error -y -f lavfi -i sine=frequency=440:sample_rate=44100:duration=0.1 -af "firequalizer=delay=$2" -f null -
+[runner] exit status: 134
