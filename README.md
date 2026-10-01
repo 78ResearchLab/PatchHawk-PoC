@@ -20,3 +20,4 @@ Follow [PatchHawk on X](https://x.com/patchhawk_) for updates.
 | OpenImageIO | 3.1.15.0 | [78RL-2026-0006](78RL-2026-0006/README.md) | A DDS header-controlled copy writes past a four-byte stack variable |
 | Squid | 7.6 | [GHSA-j9pf-q9f6-v44c](GHSA-j9pf-q9f6-v44c/README.md) | Basic-auth peer forwarding overflows a stack buffer when a long username is accepted |
 | FFmpeg | 9.0.1 and 9.0.2 | [78RL-2026-0007](78RL-2026-0007/README.md) | Separate CLI reproductions for the original `firequalizer` overflow and the 9.0.2 guard bypass |
+| libxml2 | 2.15.3 | [CVE-2026-86144](CVE-2026-86144/README.md) | XInclude loses `XML_PARSE_NONET` before a flag-aware custom loader |
