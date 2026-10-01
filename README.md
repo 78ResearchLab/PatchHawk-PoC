@@ -22,3 +22,4 @@ Follow [PatchHawk on X](https://x.com/patchhawk_) for updates.
 | FFmpeg | 9.0.1 and 9.0.2 | [78RL-2026-0007](78RL-2026-0007/README.md) | Separate CLI reproductions for the original `firequalizer` overflow and the 9.0.2 guard bypass |
 | FFmpeg | 9.0.1 | [78RL-2026-0008](78RL-2026-0008/README.md) | Continued Ogg packet triggers an ASan invalid write when `-max_alloc` is raised; 9.0.2 rejects it |
 | libxml2 | 2.15.3 | [CVE-2026-86144](CVE-2026-86144/README.md) | XInclude loses `XML_PARSE_NONET` before a flag-aware custom loader |
+| Ghostscript | 10.07.1 | [CVE-2026-39919](CVE-2026-39919/README.md) | A subsampled JPEG 2000 image overruns the packed output row |
