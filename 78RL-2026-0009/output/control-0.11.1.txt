@@ -1,0 +1,8 @@
+wrote 341 bytes, canvas=256x256, frame=(248,248)+8x8
+[runner] generator_match=passed
+JPEG XL decoder v0.11.1 [AVX2,SSE4,SSE2,Unknown]
+Read 341 compressed bytes.
+Decoded to pixels.
+256 x 256,  53.250 MP/s [53.25, 53.25], , 1 reps, 0 threads.
+[runner] target_exit_status=0
+[runner] assertion=passed

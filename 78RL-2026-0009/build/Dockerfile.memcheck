@@ -1,0 +1,4 @@
+FROM --platform=linux/386 patchhawk-libjxl-packed:0.11.1
+
+RUN apt-get update && apt-get install -y --no-install-recommends valgrind \
+    && rm -rf /var/lib/apt/lists/*

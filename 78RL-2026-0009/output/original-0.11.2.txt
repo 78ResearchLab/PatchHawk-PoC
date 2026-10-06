@@ -1,0 +1,8 @@
+wrote 345 bytes, canvas=32768x10923, frame=(0,0)+8x8
+[runner] generator_match=passed
+JPEG XL decoder v0.11.2 [AVX2,SSE4,SSE2,Unknown]
+Read 345 compressed bytes.
+Failed to create image frame.
+DecompressJxlToPackedPixelFile failed
+[runner] target_exit_status=1
+[runner] assertion=passed

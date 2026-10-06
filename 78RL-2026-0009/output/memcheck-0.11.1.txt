@@ -1,0 +1,137 @@
+wrote 345 bytes, canvas=32768x10923, frame=(0,0)+8x8
+[runner] generator_match=passed
+==9== Memcheck, a memory error detector
+==9== Copyright (C) 2002-2024, and GNU GPL'd, by Julian Seward et al.
+==9== Using Valgrind-3.24.0 and LibVEX; rerun with -h for copyright info
+==9== Command: /build/tools/djxl /case/input/poc.jxl --disable_output --num_threads=0 -v
+==9== 
+JPEG XL decoder v0.11.1 [SSE2,Unknown]
+Read 345 compressed bytes.
+==9== Invalid write of size 4
+==9==    at 0x484DFC8: memcpy (vg_replace_strmem.c:1150)
+==9==    by 0x121B4E: jxl::extras::DecodeImageJXL(unsigned char const*, unsigned int, jxl::extras::JXLDecompressParams const&, unsigned int*, jxl::extras::PackedPixelFile*, std::vector<unsigned char, std::allocator<unsigned char> >*)::{lambda(void*, unsigned int, unsigned int, unsigned int, void const*)#1}::_FUN(void*, unsigned int, unsigned int, unsigned int, void const*) (jxl.cc:506)
+==9==    by 0x4BD328A: jxl::N_SSE2::WriteToOutputStage::ProcessRow(std::vector<std::vector<float*, std::allocator<float*> >, std::allocator<std::vector<float*, std::allocator<float*> > > > const&, std::vector<std::vector<float*, std::allocator<float*> >, std::allocator<std::vector<float*, std::allocator<float*> > > > const&, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int) const (stage_write.cc:191)
+==9==    by 0x4B81568: jxl::LowMemoryRenderPipeline::RenderPadding(unsigned int, jxl::RectT<unsigned int>) (low_memory_render_pipeline.cc:799)
+==9==    by 0x4B8627F: jxl::LowMemoryRenderPipeline::ProcessBuffers(unsigned int, unsigned int) (low_memory_render_pipeline.cc:865)
+==9==    by 0x4B88102: InputReady (render_pipeline.cc:121)
+==9==    by 0x4B88102: jxl::RenderPipelineInput::Done() (render_pipeline.cc:135)
+==9==    by 0x4B208F6: operator() (dec_modular.cc:754)
+==9==    by 0x4B208F6: jxl::ThreadPool::RunCallState<jxl::ModularFrameDecoder::FinalizeDecoding(jxl::FrameHeader const&, jxl::PassesDecoderState*, jxl::ThreadPool*, bool)::{lambda(unsigned int)#1}, jxl::ModularFrameDecoder::FinalizeDecoding(jxl::FrameHeader const&, jxl::PassesDecoderState*, jxl::ThreadPool*, bool)::{lambda(unsigned int, unsigned int)#1}>::CallDataFunc(void*, unsigned int, unsigned int) (data_parallel.h:110)
+==9==    by 0x4B220BE: jxl::ModularFrameDecoder::FinalizeDecoding(jxl::FrameHeader const&, jxl::PassesDecoderState*, jxl::ThreadPool*, bool) (data_parallel.h:62)
+==9==    by 0x4ADEB2D: FinalizeFrame (dec_frame.cc:867)
+==9==    by 0x4ADEB2D: jxl::FrameDecoder::FinalizeFrame() (dec_frame.cc:856)
+==9==    by 0x4B3FD81: JxlDecoderProcessCodestream (decode.cc:1459)
+==9==    by 0x4B3FD81: HandleBoxes (decode.cc:1887)
+==9==    by 0x4B3FD81: JxlDecoderProcessInput (decode.cc:2038)
+==9==    by 0x122541: jxl::extras::DecodeImageJXL(unsigned char const*, unsigned int, jxl::extras::JXLDecompressParams const&, unsigned int*, jxl::extras::PackedPixelFile*, std::vector<unsigned char, std::allocator<unsigned char> >*) (jxl.cc:234)
+==9==    by 0x10E39A: DecompressJxlToPackedPixelFile (djxl_main.cc:394)
+==9==    by 0x10E39A: main (djxl_main.cc:561)
+==9==  Address 0x57f7f70 is 168,448 bytes inside an unallocated block of size 299,632 in arena "client"
+==9== 
+==9== Invalid write of size 4
+==9==    at 0x484DFCE: memcpy (vg_replace_strmem.c:1150)
+==9==    by 0x121B4E: jxl::extras::DecodeImageJXL(unsigned char const*, unsigned int, jxl::extras::JXLDecompressParams const&, unsigned int*, jxl::extras::PackedPixelFile*, std::vector<unsigned char, std::allocator<unsigned char> >*)::{lambda(void*, unsigned int, unsigned int, unsigned int, void const*)#1}::_FUN(void*, unsigned int, unsigned int, unsigned int, void const*) (jxl.cc:506)
+==9==    by 0x4BD328A: jxl::N_SSE2::WriteToOutputStage::ProcessRow(std::vector<std::vector<float*, std::allocator<float*> >, std::allocator<std::vector<float*, std::allocator<float*> > > > const&, std::vector<std::vector<float*, std::allocator<float*> >, std::allocator<std::vector<float*, std::allocator<float*> > > > const&, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int) const (stage_write.cc:191)
+==9==    by 0x4B81568: jxl::LowMemoryRenderPipeline::RenderPadding(unsigned int, jxl::RectT<unsigned int>) (low_memory_render_pipeline.cc:799)
+==9==    by 0x4B8627F: jxl::LowMemoryRenderPipeline::ProcessBuffers(unsigned int, unsigned int) (low_memory_render_pipeline.cc:865)
+==9==    by 0x4B88102: InputReady (render_pipeline.cc:121)
+==9==    by 0x4B88102: jxl::RenderPipelineInput::Done() (render_pipeline.cc:135)
+==9==    by 0x4B208F6: operator() (dec_modular.cc:754)
+==9==    by 0x4B208F6: jxl::ThreadPool::RunCallState<jxl::ModularFrameDecoder::FinalizeDecoding(jxl::FrameHeader const&, jxl::PassesDecoderState*, jxl::ThreadPool*, bool)::{lambda(unsigned int)#1}, jxl::ModularFrameDecoder::FinalizeDecoding(jxl::FrameHeader const&, jxl::PassesDecoderState*, jxl::ThreadPool*, bool)::{lambda(unsigned int, unsigned int)#1}>::CallDataFunc(void*, unsigned int, unsigned int) (data_parallel.h:110)
+==9==    by 0x4B220BE: jxl::ModularFrameDecoder::FinalizeDecoding(jxl::FrameHeader const&, jxl::PassesDecoderState*, jxl::ThreadPool*, bool) (data_parallel.h:62)
+==9==    by 0x4ADEB2D: FinalizeFrame (dec_frame.cc:867)
+==9==    by 0x4ADEB2D: jxl::FrameDecoder::FinalizeFrame() (dec_frame.cc:856)
+==9==    by 0x4B3FD81: JxlDecoderProcessCodestream (decode.cc:1459)
+==9==    by 0x4B3FD81: HandleBoxes (decode.cc:1887)
+==9==    by 0x4B3FD81: JxlDecoderProcessInput (decode.cc:2038)
+==9==    by 0x122541: jxl::extras::DecodeImageJXL(unsigned char const*, unsigned int, jxl::extras::JXLDecompressParams const&, unsigned int*, jxl::extras::PackedPixelFile*, std::vector<unsigned char, std::allocator<unsigned char> >*) (jxl.cc:234)
+==9==    by 0x10E39A: DecompressJxlToPackedPixelFile (djxl_main.cc:394)
+==9==    by 0x10E39A: main (djxl_main.cc:561)
+==9==  Address 0x57f7f74 is 168,452 bytes inside an unallocated block of size 299,632 in arena "client"
+==9== 
+==9== Invalid write of size 4
+==9==    at 0x484DFD4: memcpy (vg_replace_strmem.c:1150)
+==9==    by 0x121B4E: jxl::extras::DecodeImageJXL(unsigned char const*, unsigned int, jxl::extras::JXLDecompressParams const&, unsigned int*, jxl::extras::PackedPixelFile*, std::vector<unsigned char, std::allocator<unsigned char> >*)::{lambda(void*, unsigned int, unsigned int, unsigned int, void const*)#1}::_FUN(void*, unsigned int, unsigned int, unsigned int, void const*) (jxl.cc:506)
+==9==    by 0x4BD328A: jxl::N_SSE2::WriteToOutputStage::ProcessRow(std::vector<std::vector<float*, std::allocator<float*> >, std::allocator<std::vector<float*, std::allocator<float*> > > > const&, std::vector<std::vector<float*, std::allocator<float*> >, std::allocator<std::vector<float*, std::allocator<float*> > > > const&, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int) const (stage_write.cc:191)
+==9==    by 0x4B81568: jxl::LowMemoryRenderPipeline::RenderPadding(unsigned int, jxl::RectT<unsigned int>) (low_memory_render_pipeline.cc:799)
+==9==    by 0x4B8627F: jxl::LowMemoryRenderPipeline::ProcessBuffers(unsigned int, unsigned int) (low_memory_render_pipeline.cc:865)
+==9==    by 0x4B88102: InputReady (render_pipeline.cc:121)
+==9==    by 0x4B88102: jxl::RenderPipelineInput::Done() (render_pipeline.cc:135)
+==9==    by 0x4B208F6: operator() (dec_modular.cc:754)
+==9==    by 0x4B208F6: jxl::ThreadPool::RunCallState<jxl::ModularFrameDecoder::FinalizeDecoding(jxl::FrameHeader const&, jxl::PassesDecoderState*, jxl::ThreadPool*, bool)::{lambda(unsigned int)#1}, jxl::ModularFrameDecoder::FinalizeDecoding(jxl::FrameHeader const&, jxl::PassesDecoderState*, jxl::ThreadPool*, bool)::{lambda(unsigned int, unsigned int)#1}>::CallDataFunc(void*, unsigned int, unsigned int) (data_parallel.h:110)
+==9==    by 0x4B220BE: jxl::ModularFrameDecoder::FinalizeDecoding(jxl::FrameHeader const&, jxl::PassesDecoderState*, jxl::ThreadPool*, bool) (data_parallel.h:62)
+==9==    by 0x4ADEB2D: FinalizeFrame (dec_frame.cc:867)
+==9==    by 0x4ADEB2D: jxl::FrameDecoder::FinalizeFrame() (dec_frame.cc:856)
+==9==    by 0x4B3FD81: JxlDecoderProcessCodestream (decode.cc:1459)
+==9==    by 0x4B3FD81: HandleBoxes (decode.cc:1887)
+==9==    by 0x4B3FD81: JxlDecoderProcessInput (decode.cc:2038)
+==9==    by 0x122541: jxl::extras::DecodeImageJXL(unsigned char const*, unsigned int, jxl::extras::JXLDecompressParams const&, unsigned int*, jxl::extras::PackedPixelFile*, std::vector<unsigned char, std::allocator<unsigned char> >*) (jxl.cc:234)
+==9==    by 0x10E39A: DecompressJxlToPackedPixelFile (djxl_main.cc:394)
+==9==    by 0x10E39A: main (djxl_main.cc:561)
+==9==  Address 0x57f7f78 is 168,456 bytes inside an unallocated block of size 299,632 in arena "client"
+==9== 
+==9== Invalid write of size 4
+==9==    at 0x484DFDA: memcpy (vg_replace_strmem.c:1150)
+==9==    by 0x121B4E: jxl::extras::DecodeImageJXL(unsigned char const*, unsigned int, jxl::extras::JXLDecompressParams const&, unsigned int*, jxl::extras::PackedPixelFile*, std::vector<unsigned char, std::allocator<unsigned char> >*)::{lambda(void*, unsigned int, unsigned int, unsigned int, void const*)#1}::_FUN(void*, unsigned int, unsigned int, unsigned int, void const*) (jxl.cc:506)
+==9==    by 0x4BD328A: jxl::N_SSE2::WriteToOutputStage::ProcessRow(std::vector<std::vector<float*, std::allocator<float*> >, std::allocator<std::vector<float*, std::allocator<float*> > > > const&, std::vector<std::vector<float*, std::allocator<float*> >, std::allocator<std::vector<float*, std::allocator<float*> > > > const&, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int) const (stage_write.cc:191)
+==9==    by 0x4B81568: jxl::LowMemoryRenderPipeline::RenderPadding(unsigned int, jxl::RectT<unsigned int>) (low_memory_render_pipeline.cc:799)
+==9==    by 0x4B8627F: jxl::LowMemoryRenderPipeline::ProcessBuffers(unsigned int, unsigned int) (low_memory_render_pipeline.cc:865)
+==9==    by 0x4B88102: InputReady (render_pipeline.cc:121)
+==9==    by 0x4B88102: jxl::RenderPipelineInput::Done() (render_pipeline.cc:135)
+==9==    by 0x4B208F6: operator() (dec_modular.cc:754)
+==9==    by 0x4B208F6: jxl::ThreadPool::RunCallState<jxl::ModularFrameDecoder::FinalizeDecoding(jxl::FrameHeader const&, jxl::PassesDecoderState*, jxl::ThreadPool*, bool)::{lambda(unsigned int)#1}, jxl::ModularFrameDecoder::FinalizeDecoding(jxl::FrameHeader const&, jxl::PassesDecoderState*, jxl::ThreadPool*, bool)::{lambda(unsigned int, unsigned int)#1}>::CallDataFunc(void*, unsigned int, unsigned int) (data_parallel.h:110)
+==9==    by 0x4B220BE: jxl::ModularFrameDecoder::FinalizeDecoding(jxl::FrameHeader const&, jxl::PassesDecoderState*, jxl::ThreadPool*, bool) (data_parallel.h:62)
+==9==    by 0x4ADEB2D: FinalizeFrame (dec_frame.cc:867)
+==9==    by 0x4ADEB2D: jxl::FrameDecoder::FinalizeFrame() (dec_frame.cc:856)
+==9==    by 0x4B3FD81: JxlDecoderProcessCodestream (decode.cc:1459)
+==9==    by 0x4B3FD81: HandleBoxes (decode.cc:1887)
+==9==    by 0x4B3FD81: JxlDecoderProcessInput (decode.cc:2038)
+==9==    by 0x122541: jxl::extras::DecodeImageJXL(unsigned char const*, unsigned int, jxl::extras::JXLDecompressParams const&, unsigned int*, jxl::extras::PackedPixelFile*, std::vector<unsigned char, std::allocator<unsigned char> >*) (jxl.cc:234)
+==9==    by 0x10E39A: DecompressJxlToPackedPixelFile (djxl_main.cc:394)
+==9==    by 0x10E39A: main (djxl_main.cc:561)
+==9==  Address 0x57f7f7c is 168,460 bytes inside an unallocated block of size 299,632 in arena "client"
+==9== 
+==9== 
+==9== Process terminating with default action of signal 11 (SIGSEGV)
+==9==  Access not within mapped region at address 0x5C77F70
+==9==    at 0x484DFC8: memcpy (vg_replace_strmem.c:1150)
+==9==    by 0x121B4E: jxl::extras::DecodeImageJXL(unsigned char const*, unsigned int, jxl::extras::JXLDecompressParams const&, unsigned int*, jxl::extras::PackedPixelFile*, std::vector<unsigned char, std::allocator<unsigned char> >*)::{lambda(void*, unsigned int, unsigned int, unsigned int, void const*)#1}::_FUN(void*, unsigned int, unsigned int, unsigned int, void const*) (jxl.cc:506)
+==9==    by 0x4BD328A: jxl::N_SSE2::WriteToOutputStage::ProcessRow(std::vector<std::vector<float*, std::allocator<float*> >, std::allocator<std::vector<float*, std::allocator<float*> > > > const&, std::vector<std::vector<float*, std::allocator<float*> >, std::allocator<std::vector<float*, std::allocator<float*> > > > const&, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int) const (stage_write.cc:191)
+==9==    by 0x4B81568: jxl::LowMemoryRenderPipeline::RenderPadding(unsigned int, jxl::RectT<unsigned int>) (low_memory_render_pipeline.cc:799)
+==9==    by 0x4B8627F: jxl::LowMemoryRenderPipeline::ProcessBuffers(unsigned int, unsigned int) (low_memory_render_pipeline.cc:865)
+==9==    by 0x4B88102: InputReady (render_pipeline.cc:121)
+==9==    by 0x4B88102: jxl::RenderPipelineInput::Done() (render_pipeline.cc:135)
+==9==    by 0x4B208F6: operator() (dec_modular.cc:754)
+==9==    by 0x4B208F6: jxl::ThreadPool::RunCallState<jxl::ModularFrameDecoder::FinalizeDecoding(jxl::FrameHeader const&, jxl::PassesDecoderState*, jxl::ThreadPool*, bool)::{lambda(unsigned int)#1}, jxl::ModularFrameDecoder::FinalizeDecoding(jxl::FrameHeader const&, jxl::PassesDecoderState*, jxl::ThreadPool*, bool)::{lambda(unsigned int, unsigned int)#1}>::CallDataFunc(void*, unsigned int, unsigned int) (data_parallel.h:110)
+==9==    by 0x4B220BE: jxl::ModularFrameDecoder::FinalizeDecoding(jxl::FrameHeader const&, jxl::PassesDecoderState*, jxl::ThreadPool*, bool) (data_parallel.h:62)
+==9==    by 0x4ADEB2D: FinalizeFrame (dec_frame.cc:867)
+==9==    by 0x4ADEB2D: jxl::FrameDecoder::FinalizeFrame() (dec_frame.cc:856)
+==9==    by 0x4B3FD81: JxlDecoderProcessCodestream (decode.cc:1459)
+==9==    by 0x4B3FD81: HandleBoxes (decode.cc:1887)
+==9==    by 0x4B3FD81: JxlDecoderProcessInput (decode.cc:2038)
+==9==    by 0x122541: jxl::extras::DecodeImageJXL(unsigned char const*, unsigned int, jxl::extras::JXLDecompressParams const&, unsigned int*, jxl::extras::PackedPixelFile*, std::vector<unsigned char, std::allocator<unsigned char> >*) (jxl.cc:234)
+==9==    by 0x10E39A: DecompressJxlToPackedPixelFile (djxl_main.cc:394)
+==9==    by 0x10E39A: main (djxl_main.cc:561)
+==9==  If you believe this happened as a result of a stack
+==9==  overflow in your program's main thread (unlikely but
+==9==  possible), you can try to increase the size of the
+==9==  main thread stack using the --main-stacksize= flag.
+==9==  The main thread stack size used in this run was 8388608.
+==9== 
+==9== HEAP SUMMARY:
+==9==     in use at exit: 4,103,512 bytes in 142 blocks
+==9==   total heap usage: 2,497 allocs, 2,355 frees, 5,245,763 bytes allocated
+==9== 
+==9== LEAK SUMMARY:
+==9==    definitely lost: 0 bytes in 0 blocks
+==9==    indirectly lost: 0 bytes in 0 blocks
+==9==      possibly lost: 0 bytes in 0 blocks
+==9==    still reachable: 4,103,512 bytes in 142 blocks
+==9==         suppressed: 0 bytes in 0 blocks
+==9== Rerun with --leak-check=full to see details of leaked memory
+==9== 
+==9== For lists of detected and suppressed errors, rerun with: -s
+==9== ERROR SUMMARY: 193 errors from 4 contexts (suppressed: 0 from 0)
+timeout: the monitored command dumped core
+[runner] target_exit_status=139
+[runner] assertion=passed
