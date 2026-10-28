@@ -1,0 +1,33 @@
+[runner] generator_match=passed
+
+7-Zip (z) 26.04 (x64) : Copyright (c) 1999-2026 Igor Pavlov : 2026-10-05
+ 64-bit locale=C.UTF-8 Threads:32 OPEN_MAX:4096
+
+Scanning the drive for archives:
+1 file, 65536 bytes (64 KiB)
+
+Listing archive: /case/input/control.ntfs
+
+--
+Path = /case/input/control.ntfs
+Type = NTFS
+WARNING = There are lost files
+Physical Size = 65536
+Label = PoC
+File System = NTFS 3.1
+Cluster Size = 512
+Sector Size = 512
+MFT Record Size = 512
+ID = 0
+
+   Date      Time    Attr         Size   Compressed  Name
+------------------- ----- ------------ ------------  ------------------------
+                    .....         2048         2048  [SYSTEM]/[NONAME]-0
+                    D....                            [SYSTEM]
+                    D....                            [LOST]
+------------------- ----- ------------ ------------  ------------------------
+                                  2048         2048  1 files, 2 folders
+
+Warnings: 1
+[runner] target_exit_status=0
+[runner] assertion=passed

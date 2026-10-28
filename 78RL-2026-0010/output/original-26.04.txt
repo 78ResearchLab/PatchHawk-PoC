@@ -1,0 +1,80 @@
+[runner] generator_match=passed
+7-Zip (z) 26.04 (x64) : Copyright (c) 1999-2026 Igor Pavlov : 2026-10-05
+=================================================================
+==12==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x5020000117f8 at pc 0x55e00f966212 bp 0x7fff3aa28f10 sp 0x7fff3aa28f08
+READ of size 1 at 0x5020000117f8 thread T0
+    #0 0x55e00f966211 in NArchive::Ntfs::CMftRec::ParseRec(unsigned char*, unsigned int, unsigned int, unsigned int, CObjectVector<CBuffer<unsigned char>>&, NArchive::Ntfs::CVolumeInfo*) /build/26.04/CPP/7zip/Bundles/Alone2/../../Archive/NtfsHandler.cpp:1463:35
+    #1 0x55e00f96ac2c in NArchive::Ntfs::CDatabase::Open() /build/26.04/CPP/7zip/Bundles/Alone2/../../Archive/NtfsHandler.cpp:1964:16
+    #2 0x55e00f96ed50 in NArchive::Ntfs::CHandler::Open(IInStream*, unsigned long const*, IArchiveOpenCallback*) /build/26.04/CPP/7zip/Bundles/Alone2/../../Archive/NtfsHandler.cpp:2778:24
+    #3 0x55e00fd72079 in CArc::OpenStream2(COpenOptions const&) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:1964:27
+    #4 0x55e00fd7aed0 in CArc::OpenStream(COpenOptions const&) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3013:3
+    #5 0x55e00fd7bf85 in CArc::OpenStreamOrFile(COpenOptions&) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3108:17
+    #6 0x55e00fd7d3bd in CArchiveLink::Open(COpenOptions&) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3284:28
+    #7 0x55e00fd7e6f9 in CArchiveLink::Open2(COpenOptions&, IOpenCallbackUI*) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3407:17
+    #8 0x55e00fd7f7ee in CArchiveLink::Open3(COpenOptions&, IOpenCallbackUI*) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3475:17
+    #9 0x55e00fdb587c in CArchiveLink::Open_Strict(COpenOptions&, IOpenCallbackUI*) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Console/../Common/OpenArchive.h:437:22
+    #10 0x55e00fdb587c in ListArchives(CListOptions const&, CCodecs*, CObjectVector<COpenType> const&, CRecordVector<int> const&, bool, CObjectVector<UString>&, CObjectVector<UString>&, bool, bool, NWildcard::CCensorNode const&, bool, bool, bool&, UString&, CObjectVector<CProperty> const*, unsigned long&, unsigned long&) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Console/List.cpp:1191:30
+    #11 0x55e00fdbcbb3 in Main2(int, char**) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Console/Main.cpp:1526:21
+    #12 0x55e00fdc3cff in main /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Console/MainAr.cpp:132:11
+    #13 0x7f69d22d51c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #14 0x7f69d22d528a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #15 0x55e00f65e924 in _start (/usr/local/bin/7zz-vulnerable-asan+0xb1924) (BuildId: d7cf8349cb74c91d24d59670aee4b7f49c869461)
+
+0x5020000117f8 is located 0 bytes after 8-byte region [0x5020000117f0,0x5020000117f8)
+allocated by thread T0 here:
+    #0 0x55e00f737eb1 in operator new[](unsigned long) (/usr/local/bin/7zz-vulnerable-asan+0x18aeb1) (BuildId: d7cf8349cb74c91d24d59670aee4b7f49c869461)
+    #1 0x55e00f8873c6 in CBuffer<unsigned char>::Alloc(unsigned long) /build/26.04/CPP/7zip/Bundles/Alone2/../../Archive/../../Common/MyBuffer.h:69:18
+    #2 0x55e00f8873c6 in CBuffer<unsigned char>::CopyFrom(unsigned char const*, unsigned long) /build/26.04/CPP/7zip/Bundles/Alone2/../../Archive/../../Common/MyBuffer.h:87:5
+    #3 0x55e00f960d57 in NArchive::Ntfs::CAttr::ParseAttr(unsigned char const*, unsigned int, unsigned int&) /build/26.04/CPP/7zip/Bundles/Alone2/../../Archive/NtfsHandler.cpp:533:8
+    #4 0x55e00f9655d0 in NArchive::Ntfs::CMftRec::ParseRec(unsigned char*, unsigned int, unsigned int, unsigned int, CObjectVector<CBuffer<unsigned char>>&, NArchive::Ntfs::CVolumeInfo*) /build/26.04/CPP/7zip/Bundles/Alone2/../../Archive/NtfsHandler.cpp:1417:29
+    #5 0x55e00f96ac2c in NArchive::Ntfs::CDatabase::Open() /build/26.04/CPP/7zip/Bundles/Alone2/../../Archive/NtfsHandler.cpp:1964:16
+    #6 0x55e00f96ed50 in NArchive::Ntfs::CHandler::Open(IInStream*, unsigned long const*, IArchiveOpenCallback*) /build/26.04/CPP/7zip/Bundles/Alone2/../../Archive/NtfsHandler.cpp:2778:24
+    #7 0x55e00fd72079 in CArc::OpenStream2(COpenOptions const&) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:1964:27
+    #8 0x55e00fd7aed0 in CArc::OpenStream(COpenOptions const&) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3013:3
+    #9 0x55e00fd7bf85 in CArc::OpenStreamOrFile(COpenOptions&) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3108:17
+    #10 0x55e00fd7d3bd in CArchiveLink::Open(COpenOptions&) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3284:28
+    #11 0x55e00fd7e6f9 in CArchiveLink::Open2(COpenOptions&, IOpenCallbackUI*) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3407:17
+    #12 0x55e00fd7f7ee in CArchiveLink::Open3(COpenOptions&, IOpenCallbackUI*) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Common/OpenArchive.cpp:3475:17
+    #13 0x55e00fdb587c in CArchiveLink::Open_Strict(COpenOptions&, IOpenCallbackUI*) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Console/../Common/OpenArchive.h:437:22
+    #14 0x55e00fdb587c in ListArchives(CListOptions const&, CCodecs*, CObjectVector<COpenType> const&, CRecordVector<int> const&, bool, CObjectVector<UString>&, CObjectVector<UString>&, bool, bool, NWildcard::CCensorNode const&, bool, bool, bool&, UString&, CObjectVector<CProperty> const*, unsigned long&, unsigned long&) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Console/List.cpp:1191:30
+    #15 0x55e00fdbcbb3 in Main2(int, char**) /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Console/Main.cpp:1526:21
+    #16 0x55e00fdc3cff in main /build/26.04/CPP/7zip/Bundles/Alone2/../../UI/Console/MainAr.cpp:132:11
+    #17 0x7f69d22d51c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #18 0x7f69d22d528a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #19 0x55e00f65e924 in _start (/usr/local/bin/7zz-vulnerable-asan+0xb1924) (BuildId: d7cf8349cb74c91d24d59670aee4b7f49c869461)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /build/26.04/CPP/7zip/Bundles/Alone2/../../Archive/NtfsHandler.cpp:1463:35 in NArchive::Ntfs::CMftRec::ParseRec(unsigned char*, unsigned int, unsigned int, unsigned int, CObjectVector<CBuffer<unsigned char>>&, NArchive::Ntfs::CVolumeInfo*)
+Shadow bytes around the buggy address:
+  0x502000011500: fa fa 00 00 fa fa 00 00 fa fa fd fa fa fa fd fd
+  0x502000011580: fa fa fd fa fa fa fd fa fa fa fd fd fa fa fd fd
+  0x502000011600: fa fa fd fa fa fa fd fa fa fa fd fd fa fa fd fd
+  0x502000011680: fa fa 04 fa fa fa fd fa fa fa 00 fa fa fa 00 fa
+  0x502000011700: fa fa fd fd fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x502000011780: fa fa 00 fa fa fa 00 fa fa fa fd fa fa fa 00[fa]
+  0x502000011800: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000011880: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000011900: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000011980: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000011a00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==12==ABORTING
+[runner] target_exit_status=1
+[runner] assertion=passed
