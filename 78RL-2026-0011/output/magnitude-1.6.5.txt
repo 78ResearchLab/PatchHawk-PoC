@@ -1,0 +1,5 @@
+[runner] generator_match=passed
+calling pdfioFileCreateImageObjFromFile...
+image obj = 0x50b0000003b0
+[runner] target_exit_status=0
+[runner] assertion=passed

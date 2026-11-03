@@ -1,0 +1,6 @@
+[runner] generator_match=passed
+calling pdfioFileCreateImageObjFromFile...
+double free or corruption (!prev)
+timeout: the monitored command dumped core
+[runner] target_exit_status=134
+[runner] assertion=passed

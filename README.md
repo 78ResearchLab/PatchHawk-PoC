@@ -26,3 +26,4 @@ Follow [PatchHawk on X](https://x.com/patchhawk_) for updates.
 | libjxl | 0.11.1, 32-bit | [78RL-2026-0009](78RL-2026-0009/README.md) | `djxl` packed-image size wrap leads to an invalid write and crash; 0.11.2 rejects the input |
 | libpng | 1.6.58 | [CVE-2026-46675](CVE-2026-46675/README.md) | Skipping image rows after malformed zTXt leaves a stale zlib input pointer; 1.6.59 clears it |
 | 7-Zip | 26.04 | [78RL-2026-0010](78RL-2026-0010/README.md) | A short NTFS `$VOLUME_INFORMATION` attribute is read past its buffer while listing; 26.05 restores the length check |
+| PDFio | 1.6.4 | [78RL-2026-0011](78RL-2026-0011/README.md) | Importing a 16-bit PNG with an alpha channel sizes every row short by the image width, so libpng writes attacker-chosen pixel bytes past the image buffer; 1.6.5 counts the alpha plane at the image bit depth |

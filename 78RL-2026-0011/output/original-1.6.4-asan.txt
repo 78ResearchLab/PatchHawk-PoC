@@ -1,0 +1,62 @@
+[runner] generator_match=passed
+calling pdfioFileCreateImageObjFromFile...
+=================================================================
+==11==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x520000000e80 at pc 0x770e53b5d303 bp 0x7ffc6f0db4d0 sp 0x7ffc6f0dac78
+WRITE of size 512 at 0x520000000e80 thread T0
+    #0 0x770e53b5d302 in memcpy ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:115
+    #1 0x770e53a3f40c  (/lib/x86_64-linux-gnu/libpng16.so.16+0x1540c) (BuildId: 604e59dd5bb959a3074796420f80b76d54837a94)
+    #2 0x770e53a37c0b in png_read_row (/lib/x86_64-linux-gnu/libpng16.so.16+0xdc0b) (BuildId: 604e59dd5bb959a3074796420f80b76d54837a94)
+    #3 0x770e53a38e60 in png_read_rows (/lib/x86_64-linux-gnu/libpng16.so.16+0xee60) (BuildId: 604e59dd5bb959a3074796420f80b76d54837a94)
+    #4 0x5750f6c24870 in copy_png /build/vuln-asan/pdfio-content.c:2809
+    #5 0x5750f6c25d47 in pdfioFileCreateImageObjFromFile /build/vuln-asan/pdfio-content.c:2206
+    #6 0x5750f6c1e41f in main /poc/import.c:31
+    #7 0x770e5373c1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #8 0x770e5373c28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #9 0x5750f6c1e274 in _start (/usr/local/bin/import-164-vuln-asan+0xf274) (BuildId: cf56eeca0b758bf3b0fde443ba9b30ae537bbdc9)
+
+0x520000000e80 is located 0 bytes after 3584-byte region [0x520000000080,0x520000000e80)
+allocated by thread T0 here:
+    #0 0x770e53b5f340 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x5750f6c246cf in copy_png /build/vuln-asan/pdfio-content.c:2792
+    #2 0x5750f6c25d47 in pdfioFileCreateImageObjFromFile /build/vuln-asan/pdfio-content.c:2206
+    #3 0x5750f6c1e41f in main /poc/import.c:31
+    #4 0x770e5373c1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #5 0x770e5373c28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: a4a7992a8e66555c8141ab2a08a8465ff6e0ea65)
+    #6 0x5750f6c1e274 in _start (/usr/local/bin/import-164-vuln-asan+0xf274) (BuildId: cf56eeca0b758bf3b0fde443ba9b30ae537bbdc9)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors_memintrinsics.inc:115 in memcpy
+Shadow bytes around the buggy address:
+  0x520000000c00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x520000000c80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x520000000d00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x520000000d80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x520000000e00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x520000000e80:[fa]fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x520000000f00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x520000000f80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x520000001000: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x520000001080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x520000001100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==11==ABORTING
+timeout: the monitored command dumped core
+[runner] target_exit_status=134
+[runner] assertion=passed
